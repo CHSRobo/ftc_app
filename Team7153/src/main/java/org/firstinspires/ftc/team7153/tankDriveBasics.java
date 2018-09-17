@@ -55,9 +55,9 @@ public class tankDriveBasics extends OpMode{
         //This sets the power of the motors to whatever is in the corresponding motors .setPower()
 	    
         frontLeft.setPower();
-		frontRight.setPower();
-		backLeft.setPower();
-		backRight.setPower();
+	frontRight.setPower();
+	backLeft.setPower();
+	backRight.setPower();
         
 
         //This outputs the value of the gamepad sticks to the phone for the user to see mid-operation
