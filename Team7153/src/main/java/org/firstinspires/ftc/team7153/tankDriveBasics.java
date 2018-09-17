@@ -21,7 +21,7 @@ public class tankDriveBasics extends OpMode{
         DcMotor  backLeft          = null;
         
         //This sets our object equal to the motor on our robot that the phone calls "frontRight"
-        frontRight = HardwareMap.get(DcMotor.class, "frontRight";        
+        frontRight = HardwareMap.get(DcMotor.class, "frontRight");        
 	frontLeft = HardwareMap.get(DcMotor.class, "frontLeft");	
 	backRight = HardwareMap.get(DcMotor.class, "backRight");    
 	backLeft = HardwareMap.get(DcMotor.class, "backLeft");    
@@ -50,7 +50,7 @@ public class tankDriveBasics extends OpMode{
         gamepad1.left_stick_x;
         gamepad1.right_stick_y;
         gamepad1.right_stick_x;
-        */
+        
 
         //This sets the power of the motors to whatever is in the corresponding motors .setPower()
 	    
