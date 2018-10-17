@@ -1,0 +1,28 @@
+gamepad1.left_stick_x and gamepad1.left_stick_y - Movement
+gamepad1.right_stick_x - Turn
+gamepad.left/right_bumper - Strafe
+gamepad1.b - Plate
+gamepad1.a - Deposit blocks
+
+gamepad2.left_stick_y - Intake speed
+gamepad2.right_stick_x - Intake Offset
+gamepad2.a - Move lift up
+gamepad2.y - Block push
+gamepad2.x - Activate Idol Grab/Tilt
+gamepad2.right_trigger - move idolY out
+gamepad2.left_trigger  - move idolY in
+gamepad2.right_bumper  - move idolZ up
+gamepad2.left_bumper   - move idolZ down
+
+Move
+Turn
+Strafe
+Intake
+Intake Offset
+idolY out/in
+idolZ up/down
+
+Lift up
+Idol grab/tilt
+Block deposit
+plate
