@@ -38,6 +38,7 @@ class HardwareFortissimus2
     DcMotor  rightBackMotor   = null; // runs in x direction //
     DcMotor  leadScrew        = null; // Extends and Retracts //
     Servo    hook             = null; // Hooks and Unhooks //
+    Servo    relic            = null; // Knocks the relic //
 
     final double HOOK_HOOK  =  1;
     final double HOOK_UNHOOK = 0;
@@ -64,9 +65,9 @@ class HardwareFortissimus2
         rightBackMotor   = hwMap.dcMotor.get("br");
         leadScrew        = hwMap.dcMotor.get("ls");
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
-        rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        rightFrontMotor.setDirection(DcMotor.Direction.REVERSE); // Set to FORWARD if using AndyMark motors
         leftBackMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
-        rightBackMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+        rightBackMotor.setDirection(DcMotor.Direction.REVERSE); // Set to FORWARD if using AndyMark motors
 
 
         // Set all motors to zero power
@@ -85,10 +86,11 @@ class HardwareFortissimus2
         leadScrew.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        hook = hardwareMap.servo.get("hk");
+        hook = hwMap.servo.get("hk");
+        relic = hwMap.servo.get("rc");
         
         // get a reference to our colorSensor
-        c = hwMap.get(ColorSensor.class, "c");
+        // c = hwMap.get(ColorSensor.class, "c");
     }
 
     // Stop the robot from moving
