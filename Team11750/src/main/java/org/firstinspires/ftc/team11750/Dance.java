@@ -64,7 +64,7 @@ public class Dance extends BellatorumAuto {
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");
-        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
+//        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
         telemetry.addData("I feel the", "Rhythm in me");
         telemetry.update();
 
@@ -79,15 +79,15 @@ public class Dance extends BellatorumAuto {
         move(robot.BACK, 1);
         sleep(1000);
 
-        robot.armPosition(90);
+//        robot.armPosition(90);
         turn(180, 0.5); // Turn
         turn(360*4, 1); // Turn several times at full power
         turn(180, 0.5); // Turn
-        robot.armUp();
+//        robot.armUp();
         sleep (200);
-        robot.armDown();
+//        robot.armDown();
         sleep (200);
-        robot.armUp();
+//        robot.armUp();
 
         move(robot.LEFT, 1, 1); // Move left
         move(robot.RIGHT, 2, 1); // Move right

@@ -205,7 +205,7 @@ public class BellatorumAuto extends LinearOpMode {
     }
 
     private void lift(double directionPower, double distance){
-        if(!robot.clampInstalled) return;
+//        if(!robot.clampInstalled) return;
         robot.liftMotor.setPower(directionPower);
         if (directionPower<0)directionPower*=-1; // Make sure the power positive
         runtime.reset();
@@ -224,7 +224,7 @@ public class BellatorumAuto extends LinearOpMode {
         double red=0, blue=0;
         double initialTurn=3;
         log("ArmDown");
-        robot.armDown(); // Drop the color sensor arm
+//        robot.armDown(); // Drop the color sensor arm
         sleep(100); // Wait for the arm to drop
 
         turn(initialTurn); // Get close to the jewel
@@ -249,7 +249,7 @@ public class BellatorumAuto extends LinearOpMode {
 
         log("Displacing jewel...");
         turn(turnAngle-initialTurn); // Turn to knock off the jewel
-        robot.armUp();   // Raise the arm
+//        robot.armUp();   // Raise the arm
         turn(0);// Turn back
         log("Jewel displaced!");
     }

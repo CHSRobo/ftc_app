@@ -70,13 +70,13 @@ public class BellatorumAutoFrontRedExtra extends BellatorumAuto {
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");
-        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
+//        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        robot.clampClose(); // Grab the glyph
+//        robot.clampClose(); // Grab the glyph
         sleep(500); // Wait a bit
         liftUp(1); // Raise the lift in ft
 
@@ -97,7 +97,7 @@ public class BellatorumAutoFrontRedExtra extends BellatorumAuto {
         move(robot.FORWARD, 0.75); // Move forward in feet
 
         liftDown(0.6); // Lower the lift in ft
-        robot.clampOpen(); // Drop the glyph
+//        robot.clampOpen(); // Drop the glyph
         move(robot.FORWARD, 0.65, 0.4); // Move forward in feet
 
         move(robot.BACK, 0.2); // Back up
@@ -113,12 +113,12 @@ public class BellatorumAutoFrontRedExtra extends BellatorumAuto {
         turn(robot.LEFT/2, 0.8); // Turn a bit
         move(robot.RIGHT/2,0.5); // Wedge in to the glyphs
         turn(robot.FORWARD); // Straighten out
-        robot.clampClose(); robot.clampOpen(); robot.clampClose(); // Pinch the clamp
+//        robot.clampClose(); robot.clampOpen(); robot.clampClose(); // Pinch the clamp
         liftUp(0.33); // Raise the lift a few inches
         move(robot.BACK, 1.0); // Back up a foot to clear the other glyphs
         turn(robot.BACK); // Turn back to the shelves
         move(robot.FORWARD, 1.5);
-        robot.clampOpen();
+//        robot.clampOpen();
         move(robot.BACK, 0.33); // Back up a few inches6fxx
         sleep(10000);
     }

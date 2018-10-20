@@ -62,7 +62,7 @@ public class Teleop extends OpMode{
     double          clampOffset  = 0.0 ;                  // Servo mid position
     final double    CLAMP_SPEED  = 0.05 ;                 // sets rate to move servo
     private boolean drill=false; // Initially disable drill mode
-    ModernRoboticsI2cGyro gyro; // Gyroscope Sensor //
+//    ModernRoboticsI2cGyro gyro; // Gyroscope Sensor //
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -73,7 +73,7 @@ public class Teleop extends OpMode{
          * The init() method of the hardware class does all the work here
          */
         robot.init(hardwareMap);
-        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
+//        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
 
      /*   // make sure the gyro is calibrated before continuing
         // Calibrate the gyro
@@ -126,31 +126,31 @@ public class Teleop extends OpMode{
 
         float r = desens(gamepad1.right_stick_x)/(float)1.5; // Read the rotation from the right stick
 
-        // Robot Translate/Slide mode
-        if(gamepad1.y) {
-            drill = true; // Toggle drill mode
-            gyro.resetZAxisIntegrator(); // Re-orient the bot
-        }
-        if(gamepad1.x) drill=true; // Enable drill mode
-        if(gamepad1.b) drill=false; // Disable drill mode
-        if(drill) {
-            double z=-Math.toRadians(gyro.getIntegratedZValue()); // Get anchor heading
-            double angle=0;
-            double power=Math.sqrt(x*x+y*y); // Calculate the desired power
-            if (power!=0) angle=Math.atan2(y,x); // Calculate the new desired direction
-            // Set the wheels to the send the bot towards the desired direction less the z anchor + rotation
-            robot.leftFrontMotor.setPower(power*Math.cos(angle-z)+r);
-            robot.rightFrontMotor.setPower(-power*Math.sin(angle-z)-r);
-            robot.rightBackMotor.setPower(power*Math.cos(angle-z)-r);
-            robot.leftBackMotor.setPower(-power*Math.sin(angle-z)+r);
-            telemetry.addData("angle, z",  "%.2f, %.2f", angle, z);
-            telemetry.addData("power",  "%.2f", power);
-        } else { // use the old mode
+//        // Robot Translate/Slide mode
+//        if(gamepad1.y) {
+//            drill = true; // Toggle drill mode
+////            gyro.resetZAxisIntegrator(); // Re-orient the bot
+//        }
+//        if(gamepad1.x) drill=true; // Enable drill mode
+//        if(gamepad1.b) drill=false; // Disable drill mode
+//        if(drill) {
+////            double z=-Math.toRadians(gyro.getIntegratedZValue()); // Get anchor heading
+//            double angle=0, z=0;
+//            double power=Math.sqrt(x*x+y*y); // Calculate the desired power
+//            if (power!=0) angle=Math.atan2(y,x); // Calculate the new desired direction
+//            // Set the wheels to the send the bot towards the desired direction less the z anchor + rotation
+//            robot.leftFrontMotor.setPower(power*Math.cos(angle-z)+r);
+//            robot.rightFrontMotor.setPower(-power*Math.sin(angle-z)-r);
+//            robot.rightBackMotor.setPower(power*Math.cos(angle-z)-r);
+//            robot.leftBackMotor.setPower(-power*Math.sin(angle-z)+r);
+//            telemetry.addData("angle, z",  "%.2f, %.2f", angle, z);
+//            telemetry.addData("power",  "%.2f", power);
+//        } else { // use the old mode
             robot.leftFrontMotor.setPower(x-y+r);  // Set wheels equal to left stick //
             robot.rightFrontMotor.setPower(-x-y-r);  // direction plus amount of turn  //
             robot.rightBackMotor.setPower(x-y-r);
             robot.leftBackMotor.setPower(-x-y+r);
-        }
+//        }
 
         // Use gamepad left & right Bumpers to open and close the clamp
         if ((gamepad1.right_trigger > 0.01) || (gamepad2.right_trigger > 0.01)
@@ -163,8 +163,8 @@ public class Teleop extends OpMode{
         }
 
         // Use controller 2's directional pad to control the top arm
-        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.CLAMP_TOP_OPEN); }
-        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.CLAMP_TOP_CLOSED); }
+//        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.CLAMP_TOP_OPEN); }
+//        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.CLAMP_TOP_CLOSED); }
 
         // Test code for drive motors
         if (gamepad1.dpad_up) { robot.leftFrontMotor.setPower(0.5); }
@@ -173,30 +173,30 @@ public class Teleop extends OpMode{
         if (gamepad1.dpad_left) { robot.leftBackMotor.setPower(0.5); }
 
         // Move both servos to new position.  Assume servos are mirror image of each other.
-        clampOffset = Range.clip(clampOffset, -0.75, 0.75);
-        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
-        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
-        // If the clamp is closed, close the top too
-        if (clampOffset> 0.3) {
-            robot.topClamp.setPosition(robot.CLAMP_TOP_CLOSED);
-        } else {
-            robot.topClamp.setPosition(robot.CLAMP_TOP_OPEN);
-        }
-
+//        clampOffset = Range.clip(clampOffset, -0.75, 0.75);
+//        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
+//        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
+//        // If the clamp is closed, close the top too
+//        if (clampOffset> 0.3) {
+//            robot.topClamp.setPosition(robot.CLAMP_TOP_CLOSED);
+//        } else {
+//            robot.topClamp.setPosition(robot.CLAMP_TOP_OPEN);
+//        }
+//
         // Use the bumpers to move the lifts up and down
         if(gamepad1.left_bumper || gamepad2.left_bumper
                 || (gamepad2.left_stick_y > 0.1)) {
             robot.liftMotor.setPower(robot.LIFT_DOWN_POWER / 2);
-            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
+//            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
         }
        else if (gamepad1.right_bumper || gamepad2.right_bumper
                 || (gamepad2.left_stick_y < -0.1)) {
             robot.liftMotor.setPower(robot.LIFT_UP_POWER);
-            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER * 2);
+//            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER * 2);
         }
         else {
             robot.liftMotor.setPower(0.0);
-            robot.backLiftMotor.setPower(0.0);
+//            robot.backLiftMotor.setPower(0.0);
         }
 
         // Send telemetry message to signify robot running;
@@ -209,7 +209,7 @@ public class Teleop extends OpMode{
      * Code to run ONCE after the driver hits STOP
      */
     @Override
-    public void stop() {
+            public void stop() {
     }
 
 }

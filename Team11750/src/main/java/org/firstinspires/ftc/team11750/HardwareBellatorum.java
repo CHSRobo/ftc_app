@@ -23,9 +23,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Motor channel:  Left Back drive motor:    "left_back_drive"
  * Motor channel:  Right Back drive motor:   "right_back_drive"
  * Motor channel:  Lift Drive motor:         "lift_arm"
- * Motor channel:  Back Lift Drive motor:    "back_lift_arm"
- * Servo channel:  Servo to move left clamp: "left_hand"
- * Servo channel:  Servo to move right clamp:"right_hand"
  * Servo channel:  Servo to move top clamp:  "top_hand"
  */
 class HardwareBellatorum
@@ -36,13 +33,13 @@ class HardwareBellatorum
     DcMotor  leftBackMotor    = null;
     DcMotor  rightBackMotor   = null;
     DcMotor  liftMotor   = null;
-    DcMotor  backLiftMotor    = null;
-    Servo    leftClamp   = null;
-    Servo    rightClamp  = null;
+//    DcMotor  backLiftMotor    = null;
+//    Servo    leftClamp   = null;
+//    Servo    rightClamp  = null;
     Servo    topClamp = null;
-    Servo    colorArm = null;
+//    Servo    colorArm = null;
     ColorSensor colorSensor;
-    boolean clampInstalled=true; // Set to false to run without clamp installed, true to run with
+//    boolean clampInstalled=true; // Set to false to run without clamp installed, true to run with
 
     final double CLAMP_LEFT_OPEN  =  0.2;
     final double CLAMP_RIGHT_OPEN = 0.8;
@@ -105,28 +102,28 @@ class HardwareBellatorum
         setupEncoders();
 
         // Define and initialize ALL installed servos.
-        if (clampInstalled) {
+//        if (clampInstalled) {
             liftMotor    = hwMap.dcMotor.get("lift_arm");
             liftMotor.setPower(0);
             liftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-            backLiftMotor    = hwMap.dcMotor.get("back_lift_arm");
-            backLiftMotor.setPower(0);
-            backLiftMotor.setDirection(DcMotor.Direction.FORWARD); // Reverse this motor
-            backLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-            leftClamp = hwMap.servo.get("left_hand");
-            rightClamp = hwMap.servo.get("right_hand");
-            topClamp = hwMap.servo.get("top_hand");
-            leftClamp.setPosition(CLAMP_LEFT_OPEN);
-            rightClamp.setPosition(CLAMP_RIGHT_OPEN);
-            topClamp.setPosition(CLAMP_TOP_OPEN);
-        }
-        colorArm = hwMap.servo.get("color_arm");
-        colorArm.setPosition(ARM_UP);
-
-        // get a reference to our colorSensor
-        colorSensor = hwMap.get(ColorSensor.class, "sensor_color");
+//
+//            backLiftMotor    = hwMap.dcMotor.get("back_lift_arm");
+//            backLiftMotor.setPower(0);
+//            backLiftMotor.setDirection(DcMotor.Direction.FORWARD); // Reverse this motor
+//            backLiftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//
+//            leftClamp = hwMap.servo.get("left_hand");
+//            rightClamp = hwMap.servo.get("right_hand");
+//            topClamp = hwMap.servo.get("top_hand");
+//            leftClamp.setPosition(CLAMP_LEFT_OPEN);
+//            rightClamp.setPosition(CLAMP_RIGHT_OPEN);
+//            topClamp.setPosition(CLAMP_TOP_OPEN);
+//        }
+//        colorArm = hwMap.servo.get("color_arm");
+//        colorArm.setPosition(ARM_UP);
+//
+//        // get a reference to our colorSensor
+//        colorSensor = hwMap.get(ColorSensor.class, "sensor_color");
     }
 
     // Stop the robot from moving
@@ -226,24 +223,24 @@ class HardwareBellatorum
     }
 
     // Set the clamp to the specified open angle
-    void clampOpen(double angle){
-        if (!clampInstalled) return;
-        leftClamp.setPosition(CLAMP_LEFT_CLOSED - angle/2/180);
-        rightClamp.setPosition(CLAMP_RIGHT_CLOSED + angle/2/180);
-    }
-    void clampOpen(){ // Open the clamp all the way
-        if (!clampInstalled) return;
-        leftClamp.setPosition(CLAMP_LEFT_OPEN);
-        rightClamp.setPosition(CLAMP_RIGHT_OPEN);
-    }
-    void clampClose() {clampOpen(30);} // Close the clamp on a glyph
-
-    // Set the color arm to the specified down angle from 0 degrees straight up, 100 degrees down
-    void armPosition(double angle) {
-        colorArm.setPosition(ARM_UP + angle/180);
-    }
-    void armDown() {armPosition(ARM_DOWN);} // Drop the arm to the ground
-    void armUp() {armPosition(0);} // Raise the arm to the bot
+//    void clampOpen(double angle){
+//        if (!clampInstalled) return;
+//        leftClamp.setPosition(CLAMP_LEFT_CLOSED - angle/2/180);
+//        rightClamp.setPosition(CLAMP_RIGHT_CLOSED + angle/2/180);
+//    }
+//    void clampOpen(){ // Open the clamp all the way
+//        if (!clampInstalled) return;
+//        leftClamp.setPosition(CLAMP_LEFT_OPEN);
+//        rightClamp.setPosition(CLAMP_RIGHT_OPEN);
+//    }
+//    void clampClose() {clampOpen(30);} // Close the clamp on a glyph
+//
+//    // Set the color arm to the specified down angle from 0 degrees straight up, 100 degrees down
+//    void armPosition(double angle) {
+//        colorArm.setPosition(ARM_UP + angle/180);
+//    }
+//    void armDown() {armPosition(ARM_DOWN);} // Drop the arm to the ground
+//    void armUp() {armPosition(0);} // Raise the arm to the bot
 
     /***
      *

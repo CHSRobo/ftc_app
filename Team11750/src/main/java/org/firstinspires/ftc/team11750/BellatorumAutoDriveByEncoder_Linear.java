@@ -114,8 +114,8 @@ public class BellatorumAutoDriveByEncoder_Linear extends LinearOpMode {
         encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
         encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
-        robot.leftClamp.setPosition(0.0);            // S4: Stop and close the claw.
-        robot.rightClamp.setPosition(1.0);
+//        robot.leftClamp.setPosition(0.0);            // S4: Stop and close the claw.
+//        robot.rightClamp.setPosition(1.0);
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
