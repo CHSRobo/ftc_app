@@ -36,36 +36,12 @@ class HardwareFortissimus2
     DcMotor  rightFrontMotor  = null; // runs in y direction //
     DcMotor  leftBackMotor    = null; // runs in y  direction //
     DcMotor  rightBackMotor   = null; // runs in x direction //
-    DcMotor  reel   = null;
-    DcMotor track = null;
-    Servo    armleft   = null;
-    Servo    armright  = null;
-    Servo    color = null;
-    Servo   colorh = null;
-    ColorSensor c;
+    DcMotor  leadScrew        = null; // Extends and Retracts //
+    Servo    hook             = null; // Hooks and Unhooks //
 
-    final double ARM_LEFT_OPEN  =  0.4;
-    final double ARM_RIGHT_OPEN = 0.7;
-    final double ARM_LEFT_CLOSED  = 1.0;
-    final double ARM_RIGHT_CLOSED = 0.0;
-    final double LIFT_UP_POWER    =  0.25 ;
-    final double LIFT_DOWN_POWER  = -0.25 ;
-    final double LIFT_FEET_PER_SEC = 5;
-    final double FORWARD_POWER = 0.6;
-    final double FEET_PER_SEC = 4;
-    final double MOVE_START_SECS = 0.1;
-    final double TURN_POWER    = 0.1;
-    final double FORWARD =0.0;
-    final double LEFT = 90.0;
-    final double RIGHT = -90.0;
-    final double BACK = 180.0;
-    final double AROUND = 180.0;
-    final double DEGREES_PER_SEC = 340+.0;
-    final double TURN_START_SECS = 0.2;
-    final double ARM_UP = 0.18;
-    final double ARM_DOWN = 115;
-    final int COLOR_RED = 1;
-    final int COLOR_BLUE = 2;
+    final double HOOK_HOOK  =  1;
+    final double HOOK_UNHOOK = 0;
+
 
     /* local OpMode members. */
     private HardwareMap hwMap           =  null;
@@ -86,8 +62,7 @@ class HardwareFortissimus2
         rightFrontMotor  = hwMap.dcMotor.get("fr");
         leftBackMotor    = hwMap.dcMotor.get("bl");
         rightBackMotor   = hwMap.dcMotor.get("br");
-        track   = hwMap.dcMotor.get("track");
-        reel    = hwMap.dcMotor.get("reel");
+        leadScrew        = hwMap.dcMotor.get("ls");
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightFrontMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
         leftBackMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
@@ -99,7 +74,7 @@ class HardwareFortissimus2
         rightFrontMotor.setPower(0);
         leftBackMotor.setPower(0);
         rightBackMotor.setPower(0);
-        reel.setPower(0);
+        leadScrew.setPower(0);
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
@@ -107,24 +82,17 @@ class HardwareFortissimus2
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        reel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        leadScrew.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        armleft = hwMap.servo.get("al");
-        armright = hwMap.servo.get("ar");
-        armleft.setPosition(ARM_LEFT_CLOSED);
-        armright.setPosition(ARM_RIGHT_CLOSED);
-        color = hwMap.servo.get("ac");
-        colorh = hwMap.servo.get("ach");
-        color.setPosition(ARM_UP);
-        colorh.setPosition(.5);
-
+        hook = hardwareMap.servo.get("hk");
+        
         // get a reference to our colorSensor
         c = hwMap.get(ColorSensor.class, "c");
     }
 
     // Stop the robot from moving
-    void stopMoving() {
+    void stop() {
         leftBackMotor.setPower(0.0); // Stop
         rightFrontMotor.setPower(0.0);
         leftFrontMotor.setPower(0.0);
@@ -132,7 +100,7 @@ class HardwareFortissimus2
     }
 
     // Start the robot turning in the angle direction at specified power
-    void startRotate(double angle, double power) {
+    void rotate(double angle, double power) {
         double direction = 1.0; // The direction to turn
 
         if (angle < 0) { // If the angle is negative
@@ -148,30 +116,12 @@ class HardwareFortissimus2
     }
 
     // Start the robot moving in the direction specified by angle (relative to the robot front)
-    void startMovingInDirection(double angle, double power){
+    void move(double angle, double power){
         rightFrontMotor.setPower(-power * Math.cos((Math.PI / 180) * angle));
         leftBackMotor.setPower(power * Math.cos((Math.PI / 180) * angle));
         leftFrontMotor.setPower(power * Math.sin((Math.PI / 180) * angle));
         rightBackMotor.setPower(-power * Math.sin((Math.PI / 180) * angle));
     }
-
-    long timer = 0;
-    boolean FlipDrive = true;
-
-    // Set the clamp to the specified open angle
-    void clampOpen(double angle){
-        armleft.setPosition(ARM_LEFT_CLOSED - angle/2/180);
-        armright.setPosition(ARM_RIGHT_CLOSED + angle/2/180);
-    }
-    void clampOpen() {clampOpen(180);} // Open the clamp all the way
-    void clampClose() {clampOpen(30);} // Close the clamp on a glyph
-
-    // Set the color arm to the specified down angle from 0 degrees straight up, 100 degrees down
-    void armPosition(double angle) {
-        color.setPosition(ARM_UP + angle/180);
-    }
-    void armDown() {armPosition(ARM_DOWN);} // Drop the arm to the ground
-    void armUp() {armPosition(0);} // Raise the arm to the bot
 
     /***
      *
