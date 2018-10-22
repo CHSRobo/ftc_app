@@ -37,10 +37,10 @@ public class OmniTeleOp extends OpMode{
         float s = gamepad2.right_stick_x;
 
 
-        robot.leftFrontMotor.setPower(x * .75 - r * .75);  // Set wheels equal to left stick //
-        robot.rightFrontMotor.setPower(y * .75 - r * .75);  // direction plus amount of turn, //
-        robot.rightBackMotor.setPower(-r * .75 - x * .75);  //   determined by right stick.   //
-        robot.leftBackMotor.setPower(-r * .75 - y * .75);
+        robot.leftFrontMotor.setPower(x * .75 + r * .75);  // Set wheels equal to left stick //
+        robot.rightFrontMotor.setPower(- y * .75 - r * .75);  // direction plus amount of turn, //
+        robot.rightBackMotor.setPower(- r * .75 - x * .75);  //   determined by right stick.   //
+        robot.leftBackMotor.setPower( r * .75 + y * .75);
         robot.leadScrew.setPower(s * .75); // Lead Screw extends with right, retracts with left //
 
 
