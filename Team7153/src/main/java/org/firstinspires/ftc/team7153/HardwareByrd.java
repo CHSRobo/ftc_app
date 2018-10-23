@@ -22,7 +22,9 @@ class HardwareByrd
     DcMotor  backLeft          = null;
     DcMotor  lift              = null;
 
-    //ModernRoboticsI2cGyro gyro         = null;
+    ModernRoboticsI2cGyro gyro         = null;
+
+    Servo hook;
 
     static double WHEEL_CIRCUMFERENCE = 4;
     static double PULSES_PER_REVOLUTION = 280;
@@ -61,6 +63,7 @@ class HardwareByrd
         backLeft   = ahwMap.get(DcMotor.class, "bl");
 
         lift   = ahwMap.get(DcMotor.class, "lift");
+        hook   = ahwMap.get(Servo.class, "hook");
 
         frontRight.setDirection(DcMotor.Direction.FORWARD);
         frontLeft.setDirection(DcMotor.Direction.REVERSE);
@@ -87,8 +90,7 @@ class HardwareByrd
         lift.setPower(0);
 
         // Define Sensors
-        //gyro = hwMap.get(ModernRoboticsI2cGyro.class, "
-        // ro");
+        gyro = hwMap.get(ModernRoboticsI2cGyro.class, "gyro");
     }
  }
 

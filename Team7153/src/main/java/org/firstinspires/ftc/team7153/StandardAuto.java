@@ -10,7 +10,7 @@ import static org.firstinspires.ftc.team7153.HardwareByrd.MOVE_RIGHT;
 
 
 @Autonomous(name="StandardAuto")
-public class StandardAuto extends GhettoAutoByrd {
+public class StandardAuto extends AutoByrd {
 	@Override
 	public void runOpMode() throws InterruptedException {
 		autonomousInit();
