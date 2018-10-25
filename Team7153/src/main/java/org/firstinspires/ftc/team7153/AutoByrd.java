@@ -14,7 +14,7 @@ public class AutoByrd extends LinearOpMode {
 	HardwareByrd robot = new HardwareByrd(); //Gets robot from HardwareByrd class
 	private double imaginaryAngle=0;         //Sets the robot's initial angle to 0
 
-	ElapsedTime runTime = new ElapsedTime();
+	private ElapsedTime runTime = new ElapsedTime();
 	void autonomousInit(){
 
 
@@ -35,26 +35,12 @@ public class AutoByrd extends LinearOpMode {
 		telemetry.update();
 	}
 
-	void autonomousStart() throws InterruptedException{
+	void autonomousStart() {
 		//Reset the gyroscope to account for drift
 		robot.gyro.resetZAxisIntegrator();
 
 		//Reset the timer to 0
 		runTime.reset();
-	}
-
-	void lift(boolean LIFT_UP){
-		if(LIFT_UP){
-			robot.lift.setPower(1);
-			while(robot.lift.getCurrentPosition()<144){
-				sleep(5);
-			}
-		} else {
-			robot.lift.setPower(-1);
-			while(robot.lift.getCurrentPosition()>0){
-				sleep(5);
-			}
-		}
 	}
 
 	void move(double DISTANCE, double SPEED, double DIRECTION) throws InterruptedException {
@@ -63,7 +49,7 @@ public class AutoByrd extends LinearOpMode {
 		}
 		turn(DIRECTION,DEFAULT_TURN_SPEED);
 
-		double deltaDistance = 0;
+		double deltaDistance;
 		double deltaDisplacement = 0;
 		double pastTime = getRuntime();
 
@@ -85,13 +71,13 @@ public class AutoByrd extends LinearOpMode {
 			//SPEED PI
 			double speedError = SPEED - inchesPerSecond;
 			speedIntegral += (speedError * deltaTime);
-			double speedOutput = (1 * speedError) + (1 * speedIntegral);
+			double speedOutput = (1/4 * speedError);// + (1 * speedIntegral);
 			//
 
 			//ANGLE PI
 			angleError += Math.sin(DIRECTION)*deltaDistance;
 			angleIntegral += (angleError * deltaTime);
-			double angleOutput = (1 * angleError) + (1 * angleIntegral);
+			double angleOutput = (1/90 * angleError);// + (1 * angleIntegral);
 			//
 
 			robot.frontLeft.setPower(speedOutput+angleOutput);
@@ -100,8 +86,19 @@ public class AutoByrd extends LinearOpMode {
 			robot.backRight.setPower(speedOutput-angleOutput);
 
 			deltaDisplacement += Math.cos(DIRECTION)*deltaDistance;
-			stopMoving();
+			telemetry.addData("speedError:      ", speedError);
+			telemetry.addData("speedIntegral:   ", speedIntegral);
+			telemetry.addData("speedOutput:     ", speedOutput);
+			telemetry.addData("angleError:      ", angleError);
+			telemetry.addData("angleIntegral:   ", angleIntegral);
+			telemetry.addData("angleOutput:     ", angleOutput);
+			telemetry.addData("inchesPerSecond: ", inchesPerSecond);
+			telemetry("Move", "Main Loop");
+			if(isStopRequested()){
+				return;
+			}
 		}
+		stopMoving();
 	}
 
 	private void resetTimer(){
@@ -127,16 +124,28 @@ public class AutoByrd extends LinearOpMode {
 			}
 			stopMoving();
 			turn(imaginaryAngle,DEFAULT_TURN_SPEED);
-			telemetry();
+			telemetry("Straighten", "Main Loop");
 		}
 	}
 
-	private void telemetry(){
+	private void telemetry(String FUNCTION, String PART){
+		telemetry.addData("Function: ", FUNCTION + " - " + PART);
+		telemetry.addData("","");
+		telemetry.addData("///////DEFAULT INFORMATION","///////");
 		telemetry.addData("/////MOTORS", "//////");
 		telemetry.addData("FrontLeft:  ", robot.frontLeft.getPower());
 		telemetry.addData("FrontRight: ", robot.frontRight.getPower());
 		telemetry.addData("BackLeft:   ", robot.backLeft.getPower());
 		telemetry.addData("BackRight:  ", robot.backRight.getPower());
+		telemetry.addData("FrontLeft Position:  ", robot.frontLeft.getCurrentPosition());
+		telemetry.addData("FrontRight Position: ", robot.frontRight.getCurrentPosition());
+		telemetry.addData("BackLeft Position:   ", robot.backLeft.getCurrentPosition());
+		telemetry.addData("BackRight Position:  ", robot.backRight.getCurrentPosition());
+		telemetry.addData("/////SERVOS", "//////");
+		telemetry.addData("Servo: ", robot.hook.getPosition());
+		telemetry.addData("/////SENSOR DATA","/////");
+		telemetry.addData("Gyro Heading:     ", robot.gyro.getHeading());
+		telemetry.addData("Gyro IntegratedZ: ", robot.gyro.getIntegratedZValue());
 		telemetry.update();
 	}
 
@@ -169,7 +178,7 @@ public class AutoByrd extends LinearOpMode {
 			telemetry.addData("Function: ", "Turn");
 			telemetry.addData("Target Angle:  ", angle);
 			telemetry.addData("Current Speed: ", speed);
-			telemetry();
+			telemetry("Turn" , "Main Loop");
 		}
 		stopMoving();
 		sleep(100);
@@ -185,6 +194,27 @@ public class AutoByrd extends LinearOpMode {
 	        robot.hook.setPosition(0);
         }
     }
+
+	void lift(boolean LIFT_UP){
+		robot.lift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+		robot.lift.setPower(1);
+		if(LIFT_UP){
+			robot.lift.setTargetPosition(24000);
+
+		} else {
+			robot.lift.setTargetPosition(0);
+		}
+		while(robot.lift.isBusy()){
+			sleep(5);
+			telemetry.addData("Pulses Remaining: ",24000-robot.lift.getCurrentPosition());
+			telemetry.update();
+			if(isStopRequested()){
+				return;
+			}
+		}
+		robot.lift.setPower(0);
+		robot.lift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+	}
 
 	@Override
 	public void runOpMode() throws InterruptedException {

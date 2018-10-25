@@ -44,6 +44,9 @@ class HardwareByrd
     static boolean LIFT_UP = true;
     static boolean LIFT_DOWN = false;
 
+    static boolean UNHOOK = false;
+    static boolean HOOK   = true;
+
     /* Constructor */
     HardwareByrd() {
 
