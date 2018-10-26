@@ -64,10 +64,10 @@ class HardwareFortissimus2
         leftBackMotor    = hwMap.dcMotor.get("bl");
         rightBackMotor   = hwMap.dcMotor.get("br");
         leadScrew        = hwMap.dcMotor.get("ls");
-        leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to FORWARD if using AndyMark motors
-        leftBackMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightBackMotor.setDirection(DcMotor.Direction.FORWARD); // Set to FORWARD if using AndyMark motors
+        leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to all to FORWARD
+        rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
+        rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
 
 
         // Set all motors to zero power
