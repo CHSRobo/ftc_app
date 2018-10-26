@@ -12,17 +12,17 @@ import static org.firstinspires.ftc.team7153.HardwareByrd.PULSES_PER_REVOLUTION;
 public class TestByrd extends OpMode{
      private HardwareByrd robot = new HardwareByrd();
 
-    double pastWheelAverage = 0;
-    double deltaDistance;
-    double deltaDisplacement = 0;
-    double pastTime = getRuntime();
+    private double pastWheelAverage = 0;
+    private double deltaDistance;
+    private double deltaDisplacement = 0;
+    private double pastTime = getRuntime();
 
-    double speedIntegral = 0;
-    double angleIntegral = 0;
-    double angleError = 0;
-    double SPEED = 6;
-    double P = 0, I = 0;
-    double inputTimer = 0;
+    private double speedIntegral = 0;
+    private double angleIntegral = 0;
+    private double angleError = 0;
+    private double SPEED = 6;
+    private double P = 0, I = 0;
+    private double inputTimer = 0;
     @Override
     public void init() {
     }	
@@ -75,5 +75,8 @@ public class TestByrd extends OpMode{
             //telemetry.addData("angleIntegral:   ", angleIntegral);
             //telemetry.addData("angleOutput:     ", angleOutput);
             telemetry.addData("inchesPerSecond: ", inchesPerSecond);
+            telemetry.addData("P: ", P);
+            telemetry.addData("I: ", I);
+            telemetry.update();
     }
 }

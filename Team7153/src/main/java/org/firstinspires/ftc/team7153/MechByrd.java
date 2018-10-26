@@ -50,5 +50,6 @@ public class MechByrd extends OpMode{
         telemetry.addData("BackRight Power: ", robot.backRight.getPower());
     	telemetry.addData("Lift Position: ", robot.lift.getCurrentPosition());
         telemetry.addData("Lift Power: ", robot.lift.getPower());
+        telemetry.update();
     }	
 }
