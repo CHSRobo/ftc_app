@@ -42,7 +42,7 @@ public class MechByrd extends OpMode{
         telemetry.addData("//Gamepad", " 2//");
         telemetry.addData("Left Stick Y", gamepad2.left_stick_y);
         telemetry.addData("////Sensors", "////");
-        //telemetry.addData("Gyroscope Heading", robot.gyro.getHeading());
+        telemetry.addData("Gyroscope Heading", robot.imu.getQuaternionOrientation());
         telemetry.addData("////Motor", " Info////");
         telemetry.addData("FrontLeft Power: ", robot.frontLeft.getPower());
         telemetry.addData("FrontRight Power: ", robot.frontRight.getPower());
