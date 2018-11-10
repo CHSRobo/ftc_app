@@ -49,7 +49,17 @@ public class OmniTeleOp extends OpMode{
 
         } else if (gamepad2.b) { // unhooks the hook //
             robot.hook.setPosition(robot.HOOK_UNHOOK);
+        
+        } else if (gamepad2.dpad_up) { // pusher up //
+            robot.push.setPosition(robot.PUSH_UP);
+            
+        } else if (gamepad2.dpad_left || gamepad2.dpad_right) { // pusher mid //
+            robot.push.setPosition(robot.PUSH_MID);
+            
+        } else if (gamepad2.dpad_down) { // pusher down //
+            robot.push.setPosition(robot.PUSH_DOWN);
         }
+        
     }
 
     /*
