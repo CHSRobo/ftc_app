@@ -39,9 +39,13 @@ class HardwareFortissimus2
     DcMotor  leadScrew        = null; // Extends and Retracts //
     Servo    hook             = null; // Hooks and Unhooks //
     Servo    relic            = null; // Knocks the relic //
+    Servo    push             = null; // Pushes the blocks //
 
     final double HOOK_HOOK  =  1;
     final double HOOK_UNHOOK = 0;
+    final double PUSH_UP = 1;
+    final double PUSH_MID = 0.5;
+    final double PUSH_DOWN = 0;
 
 
     /* local OpMode members. */
@@ -88,6 +92,7 @@ class HardwareFortissimus2
         // Define and initialize ALL installed servos.
         hook = hwMap.servo.get("hk");
         relic = hwMap.servo.get("rc");
+        push = hwMap.servo.get("psh");
         
         // get a reference to our colorSensor
         // c = hwMap.get(ColorSensor.class, "c");
