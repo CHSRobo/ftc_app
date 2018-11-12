@@ -152,19 +152,23 @@ public class Teleop extends OpMode{
             robot.leftBackMotor.setPower(-x-y+r);
 //        }
 
-        // Use gamepad left & right Bumpers to open and close the clamp
-        if ((gamepad1.right_trigger > 0.01) || (gamepad2.right_trigger > 0.01)
-                || (gamepad2.right_stick_x < -0.1)) {
-            clampOffset += CLAMP_SPEED;
-        }
-        else if ((gamepad1.left_trigger > 0.01) || (gamepad2.left_trigger > 0.01)
-                || (gamepad2.right_stick_x > 0.1)) {
-            clampOffset -= CLAMP_SPEED;
-        }
+        // Rehook or unhook the bot to/from the lander
+        if (gamepad1.x) robot.rehook();
+        if (gamepad1.b) robot.unhook();
+
+        // Use gamepad left & right triggers to open and close the clamp
+//        if ((gamepad1.right_trigger > 0.01) || (gamepad2.right_trigger > 0.01)
+//                || (gamepad2.right_stick_x < -0.1)) {
+//            clampOffset += CLAMP_SPEED;
+//        }
+//        else if ((gamepad1.left_trigger > 0.01) || (gamepad2.left_trigger > 0.01)
+//                || (gamepad2.right_stick_x > 0.1)) {
+//            clampOffset -= CLAMP_SPEED;
+//        }
 
         // Use controller 2's directional pad to control the top arm
-//        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.CLAMP_TOP_OPEN); }
-//        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.CLAMP_TOP_CLOSED); }
+        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.HOOK_OFF); }
+        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.HOOK_ON); }
 
         // Test code for drive motors
         if (gamepad1.dpad_up) { robot.leftFrontMotor.setPower(0.5); }

@@ -67,7 +67,7 @@ public class BellatorumAuto extends LinearOpMode {
     /* Declare OpMode members. */
     HardwareBellatorum robot   = new HardwareBellatorum();   // Use Bellatorum's hardware
     private ElapsedTime runtime = new ElapsedTime();
-    ModernRoboticsI2cGyro   gyro    = null;                    // Additional Gyro device
+//    ModernRoboticsI2cGyro   gyro    = null;                    // Additional Gyro device
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
@@ -177,7 +177,7 @@ public class BellatorumAuto extends LinearOpMode {
         }
         robot.stopMoving();
     }
-    void turn(double angle, double power) { gyroTurn(power, angle);}
+    void turn(double angle, double power) {/* gyroTurn(power, angle);*/}
     void turn(double angle) {turn(angle, robot.TURN_POWER);} // Overload with default power
 
     void oldMove(double angle, double distance, double power){
@@ -197,7 +197,7 @@ public class BellatorumAuto extends LinearOpMode {
         robot.setupEncoders();
     }
     void move(double angle, double distance, double power){
-        gyroDrive(power, distance, angle);
+//        gyroDrive(power, distance, angle);
     }
 
     void move(double angle, double distance){ // Overload with default power
@@ -231,11 +231,11 @@ public class BellatorumAuto extends LinearOpMode {
 
         runtime.reset();
         while (runtime.seconds() < 0.5) {
-            blue+=robot.colorSensor.blue(); // Add up the blue readings
-            red+=robot.colorSensor.red(); // Add up the red readings
-            telemetry.addData("Clear", robot.colorSensor.alpha());
+//            blue+=robot.colorSensor.blue(); // Add up the blue readings
+//            red+=robot.colorSensor.red(); // Add up the red readings
+//            telemetry.addData("Clear", robot.colorSensor.alpha());
             telemetry.addData("Red  ", red);
-            telemetry.addData("Green", robot.colorSensor.green());
+//            telemetry.addData("Green", robot.colorSensor.green());
             telemetry.addData("Blue ", blue);
             telemetry.update();
             if (!opModeIsActive()) {robot.stopMoving(); return;} // Stop and return
@@ -257,17 +257,17 @@ public class BellatorumAuto extends LinearOpMode {
     void blueTeamDisplaceJewel() {displaceJewel(robot.COLOR_RED);}
 
     void autonomousInit(){
-        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
-        gyro.calibrate();
+//        gyro = (ModernRoboticsI2cGyro)hardwareMap.gyroSensor.get("gyro");
+//        gyro.calibrate();
 
         // make sure the gyro is calibrated before continuing
-        while (!isStopRequested() && gyro.isCalibrating())  {
+//        while (!isStopRequested() && gyro.isCalibrating())  {
             sleep(50);
             idle();
-        }
+//        }
 
         // Initialize the Vuforia capability
-        initVuforia();
+//        initVuforia();
     }
 
     @Override
@@ -285,7 +285,7 @@ public class BellatorumAuto extends LinearOpMode {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        gyro.resetZAxisIntegrator();
+//        gyro.resetZAxisIntegrator();
 
         // Get the RelicRecoverVuMark location
         getRelicRecoveryVuMark();
@@ -307,46 +307,46 @@ public class BellatorumAuto extends LinearOpMode {
     public void gyroDrive ( double speed,
                             double distance,
                             double angle) {
-        double  error;
-        double  steer;
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-
-            log("Start moving...");
-            robot.startMovingEncoder(angle, distance, speed); // Start moving in the right direction
-
-            // Run long enough to make the distance + 1 sec, then timeout
-            runtime.reset();
-            // keep looping while we are still active, and BOTH motors are running.
-            while (opModeIsActive() && robot.motorsBusy()
-                    && runtime.seconds() < distance/robot.FEET_PER_SEC/speed + 0.5) {
-
-                // adjust direction and speed based on heading error.
-                error = getError(angle);
-                steer = getSteer(error, P_DRIVE_COEFF);
-
-                robot.startMovingInDirection(angle-steer, speed);
-
-                // Display drive status for the driver.
-                telemetry.addData("Angle/Speed",   "%5.2f:%5.2f",  angle, speed);
-                telemetry.addData("Err/St/New Angle",  "%5.1f/%5.1f, %5.2f",
-                        error, steer, angle-steer);
-                telemetry.addData("Actual",  "%7d:%7d:%7d:%7d",
-                        robot.leftFrontMotor.getCurrentPosition(),
-                        robot.rightFrontMotor.getCurrentPosition(),
-                        robot.leftBackMotor.getCurrentPosition(),
-                        robot.rightBackMotor.getCurrentPosition());
-                telemetry.addData("Runtime", "%5.3f", runtime.seconds());
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            robot.stopMoving();
-
-            // Turn off RUN_TO_POSITION
-            robot.setupEncoders();
-        }
+//        double  error;
+//        double  steer;
+//
+//        // Ensure that the opmode is still active
+//        if (opModeIsActive()) {
+//
+//            log("Start moving...");
+//            robot.startMovingEncoder(angle, distance, speed); // Start moving in the right direction
+//
+//            // Run long enough to make the distance + 1 sec, then timeout
+//            runtime.reset();
+//            // keep looping while we are still active, and BOTH motors are running.
+//            while (opModeIsActive() && robot.motorsBusy()
+//                    && runtime.seconds() < distance/robot.FEET_PER_SEC/speed + 0.5) {
+//
+//                // adjust direction and speed based on heading error.
+//                error = getError(angle);
+//                steer = getSteer(error, P_DRIVE_COEFF);
+//
+//                robot.startMovingInDirection(angle-steer, speed);
+//
+//                // Display drive status for the driver.
+//                telemetry.addData("Angle/Speed",   "%5.2f:%5.2f",  angle, speed);
+//                telemetry.addData("Err/St/New Angle",  "%5.1f/%5.1f, %5.2f",
+//                        error, steer, angle-steer);
+//                telemetry.addData("Actual",  "%7d:%7d:%7d:%7d",
+//                        robot.leftFrontMotor.getCurrentPosition(),
+//                        robot.rightFrontMotor.getCurrentPosition(),
+//                        robot.leftBackMotor.getCurrentPosition(),
+//                        robot.rightBackMotor.getCurrentPosition());
+//                telemetry.addData("Runtime", "%5.3f", runtime.seconds());
+//                telemetry.update();
+//            }
+//
+//            // Stop all motion;
+//            robot.stopMoving();
+//
+//            // Turn off RUN_TO_POSITION
+//            robot.setupEncoders();
+//        }
     }
 
     /**
@@ -361,12 +361,12 @@ public class BellatorumAuto extends LinearOpMode {
      *                   If a relative angle is required, add/subtract from current heading.
      */
     public void gyroTurn (  double speed, double angle) {
-
-        // keep looping while we are still active, and not on heading.
-        while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
-            // Update telemetry & Allow time for other processes to run.
-            telemetry.update();
-        }
+//
+//        // keep looping while we are still active, and not on heading.
+//        while (opModeIsActive() && !onHeading(speed, angle, P_TURN_COEFF)) {
+//            // Update telemetry & Allow time for other processes to run.
+//            telemetry.update();
+//        }
     }
 
     /**
@@ -380,19 +380,19 @@ public class BellatorumAuto extends LinearOpMode {
      * @param holdTime   Length of time (in seconds) to hold the specified heading.
      */
     public void gyroHold( double speed, double angle, double holdTime) {
-
-        ElapsedTime holdTimer = new ElapsedTime();
-
-        // keep looping while we have time remaining.
-        holdTimer.reset();
-        while (opModeIsActive() && (holdTimer.time() < holdTime)) {
-            // Update telemetry & Allow time for other processes to run.
-            onHeading(speed, angle, P_TURN_COEFF);
-            telemetry.update();
-        }
-
-        // Stop all motion;
-        robot.stopMoving();
+//
+//        ElapsedTime holdTimer = new ElapsedTime();
+//
+//        // keep looping while we have time remaining.
+//        holdTimer.reset();
+//        while (opModeIsActive() && (holdTimer.time() < holdTime)) {
+//            // Update telemetry & Allow time for other processes to run.
+//            onHeading(speed, angle, P_TURN_COEFF);
+//            telemetry.update();
+//        }
+//
+//        // Stop all motion;
+//        robot.stopMoving();
     }
 
     /**
@@ -438,12 +438,12 @@ public class BellatorumAuto extends LinearOpMode {
      */
     public double getError(double targetAngle) {
 
-        double robotError;
+        double robotError = 0;
 
         // calculate error in -179 to +180 range  (
-        robotError = targetAngle + gyro.getIntegratedZValue();
-        while (robotError > 180)  robotError -= 360;
-        while (robotError <= -180) robotError += 360;
+//        robotError = targetAngle + gyro.getIntegratedZValue();
+//        while (robotError > 180)  robotError -= 360;
+//        while (robotError <= -180) robotError += 360;
         return robotError;
     }
 

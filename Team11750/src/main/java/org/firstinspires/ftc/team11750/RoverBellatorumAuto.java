@@ -30,6 +30,7 @@
 package org.firstinspires.ftc.team11750;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
 
 /**
@@ -47,8 +48,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Bellatorum: Front Blue", group="Bellatorum")
-public class BellatorumAutoFrontBlue extends BellatorumAuto {
+@Autonomous(name="Rover Bellatorum Auto", group="Bellatorum")
+public class RoverBellatorumAuto extends BellatorumAuto {
 
     @Override
     public void runOpMode() {
@@ -70,33 +71,35 @@ public class BellatorumAutoFrontBlue extends BellatorumAuto {
         waitForStart();
 //        gyro.resetZAxisIntegrator(); // Reset the gyro
 
-//        robot.clampClose(); // Grab the glyph
         sleep(1000); // Wait one second
-        liftUp(1); // Raise the lift in ft
+        liftDown(14); // Lower the lift in ft
+//        robot.unhook();
+
+        sleep(1000); // Wait one second
+        oldMove(robot.LEFT, 6/12); // Move out of hook
+        oldMove(robot.FORWARD, 1); // Move away from the lander
 
         // Get the RelicRecoverVuMark location
-        relicVuMark = getRelicRecoveryVuMark();
+//        relicVuMark = getRelicRecoveryVuMark();
 
-        displaceJewel(robot.COLOR_RED); // Knock off the jewel of this color
-
-        move(robot.LEFT, 2.5); // Move in feet
-        move(robot.FORWARD, 0.33); // move away from the glyph box
-        move(robot.RIGHT, 0.5, 0.2); // Move back to align with platform
-
-        // Move the robot according to the relic VuMark
-        double relicMove = 7.63/12; // Default to move in feet
-        double turnAngle=-155.0; // Default turn angle
-        if (relicVuMark == RelicRecoveryVuMark.LEFT) { turnAngle += -19.0; } // Turn a little further
-        if (relicVuMark == RelicRecoveryVuMark.RIGHT) { relicMove += 8.63/12; } // 7.63" further
-        move(robot.LEFT, relicMove); // Move left relicMove feet
-        turn(turnAngle); // Turn left in degrees
-        move(robot.FORWARD, 0.75); // Move forward in feet
-
-        liftDown(0.6); // Lower the lift in ft
-//        robot.clampOpen(); // Drop the glyph
-        move(robot.FORWARD, 0.65, 0.4); // Move forward in feet
-
-        move(robot.BACK, 0.2); // Back up
+//        move(robot.RIGHT, 2.5, 1); // Move in feet
+//        move(robot.FORWARD, 0.33); // move away from the glyph box
+//        move(robot.LEFT, 1.0, 0.2); // Move back to align with platform
+//
+//        // Move the robot according to the relic VuMark
+//        double relicMove = 7.63/12; // Default to move in feet
+//        double turnAngle=145.0; // Default turn angle
+//        if (relicVuMark == RelicRecoveryVuMark.RIGHT) { turnAngle += 19.0; } // Turn a little further
+//        if (relicVuMark == RelicRecoveryVuMark.LEFT) { relicMove += 8.63/12; } // 7.63" further
+//        move(robot.RIGHT, relicMove); // Move right relicMove feet
+//        turn(turnAngle); // Turn left in degrees
+//        move(robot.FORWARD, 0.75); // Move forward in feet
+//
+//        liftDown(0.6); // Lower the lift in ft
+////        robot.clampOpen(); // Drop the glyph
+//        move(robot.FORWARD, 0.65, 0.4); // Move forward in feet
+//
+//        move(robot.BACK, 0.2); // Back up
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

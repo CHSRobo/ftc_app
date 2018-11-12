@@ -38,7 +38,7 @@ class HardwareBellatorum
 //    Servo    rightClamp  = null;
     Servo    topClamp = null;
 //    Servo    colorArm = null;
-    ColorSensor colorSensor;
+//    ColorSensor colorSensor;
 //    boolean clampInstalled=true; // Set to false to run without clamp installed, true to run with
 
     final double CLAMP_LEFT_OPEN  =  0.2;
@@ -48,9 +48,12 @@ class HardwareBellatorum
     final double CLAMP_TOP_OPEN = -0.1;
     final double CLAMP_TOP_CLOSED = 1.0;
 
-    final double LIFT_UP_POWER    =  0.25 ;
-    final double LIFT_DOWN_POWER  = -0.13 ;
-    final double LIFT_FEET_PER_SEC = 5;
+    final double HOOK_OFF = 1;
+    final double HOOK_ON = 1;
+
+    final double LIFT_UP_POWER    =  1.00 ;
+    final double LIFT_DOWN_POWER  = -1.00 ;
+    final double LIFT_FEET_PER_SEC = 1;
     final double FORWARD_POWER = 0.6;
     final double FEET_PER_SEC = 4;
     final double MOVE_START_SECS = 0.1;
@@ -114,7 +117,7 @@ class HardwareBellatorum
 //
 //            leftClamp = hwMap.servo.get("left_hand");
 //            rightClamp = hwMap.servo.get("right_hand");
-//            topClamp = hwMap.servo.get("top_hand");
+            topClamp = hwMap.servo.get("top_hand");
 //            leftClamp.setPosition(CLAMP_LEFT_OPEN);
 //            rightClamp.setPosition(CLAMP_RIGHT_OPEN);
 //            topClamp.setPosition(CLAMP_TOP_OPEN);
@@ -222,6 +225,13 @@ class HardwareBellatorum
         startMovingInDirection(angle, power);
     }
 
+    // Unhook or rehook to/from the lander
+    void unhook() {
+//        topClamp.setPosition(HOOK_OFF);
+    }
+    void rehook() {
+//        topClamp.setPosition(HOOK_ON);
+    }
     // Set the clamp to the specified open angle
 //    void clampOpen(double angle){
 //        if (!clampInstalled) return;

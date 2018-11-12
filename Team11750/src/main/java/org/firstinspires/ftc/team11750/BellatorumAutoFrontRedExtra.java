@@ -63,7 +63,7 @@ public class BellatorumAutoFrontRedExtra extends BellatorumAuto {
         robot.init(hardwareMap);
 
         autonomousInit(); // Initialize the autonomous method
-        gyro.resetZAxisIntegrator(); // Reset the gyro
+//        gyro.resetZAxisIntegrator(); // Reset the gyro
 
         // Get the RelicRecoverVuMark location
         relicVuMark = getRelicRecoveryVuMark();

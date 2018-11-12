@@ -68,7 +68,7 @@ public class BellatorumAutoBackRed extends BellatorumAuto {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        gyro.resetZAxisIntegrator(); // Reset the gyro
+//        gyro.resetZAxisIntegrator(); // Reset the gyro
 
 //        robot.clampClose(); // Grab the glyph
         sleep(1000); // Wait one second

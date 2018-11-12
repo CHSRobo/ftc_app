@@ -70,7 +70,7 @@ public class Dance extends BellatorumAuto {
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        gyro.resetZAxisIntegrator(); // Reset the gyro
+//        gyro.resetZAxisIntegrator(); // Reset the gyro
 
         // Do the box step
         move(robot.RIGHT, 1);
