@@ -32,6 +32,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 class HardwareFortissimus2
 {
     /* Public OpMode members. */
+
     DcMotor  leftFrontMotor   = null; // runs in x direction //
     DcMotor  rightFrontMotor  = null; // runs in y direction //
     DcMotor  leftBackMotor    = null; // runs in y  direction //
@@ -39,9 +40,14 @@ class HardwareFortissimus2
     DcMotor  leadScrew        = null; // Extends and Retracts //
     Servo    hook             = null; // Hooks and Unhooks //
     Servo    relic            = null; // Knocks the relic //
+    Servo    push             = null; // Pushes the blocks //
 
     final double HOOK_HOOK  =  1;
     final double HOOK_UNHOOK = 0;
+    final double PUSH_UP = 1;
+    final double PUSH_MIDUP = 0.3;
+    final double PUSH_MIDDOWN = 0.15;
+    final double PUSH_DOWN = 0;
 
 
     /* local OpMode members. */
@@ -88,6 +94,7 @@ class HardwareFortissimus2
         // Define and initialize ALL installed servos.
         hook = hwMap.servo.get("hk");
         relic = hwMap.servo.get("rc");
+        push = hwMap.servo.get("ph");
         
         // get a reference to our colorSensor
         // c = hwMap.get(ColorSensor.class, "c");
