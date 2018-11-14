@@ -17,7 +17,7 @@ import static org.firstinspires.ftc.team7153.HardwareByrd.HOOK_OPEN;
 @TeleOp(name="MechByrd")
 public class MechByrd extends OpMode{	
 	private HardwareByrd robot = new HardwareByrd();
-    Orientation angles;
+    private Orientation angles;
     private double inputTimer = 0;
     private boolean isHooked = false;
     @Override
@@ -30,7 +30,7 @@ public class MechByrd extends OpMode{
 		double maxSpeed = .7;//Defines what fraction of speed the robot will run at
 		//double radGyro = ((angles.firstAngle+180) * Math.PI) / 180;
 		double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-		double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;;// - radGyro;
+		double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;// - radGyro;
 		if(gamepad1.right_bumper){robotAngle=Math.PI*7/4; r=1;}
 		else if (gamepad1.left_bumper){robotAngle=Math.PI*3/4; r=1;}
 		double rightX = 1.667*gamepad1.right_stick_x;
@@ -60,9 +60,6 @@ public class MechByrd extends OpMode{
         }
 
         float hsvValues[] = {0F, 0F, 0F};
-
-        // values is a reference to the hsvValues array.
-        final float values[] = hsvValues;
 
         // sometimes it helps to multiply the raw RGB values with a scale factor
         // to amplify/attentuate the measured values.

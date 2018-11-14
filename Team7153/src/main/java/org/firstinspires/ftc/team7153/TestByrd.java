@@ -1,9 +1,7 @@
 package org.firstinspires.ftc.team7153;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;	
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;	
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import static com.qualcomm.hardware.hitechnic.HiTechnicNxtIrSeekerSensor.DIRECTION;
 import static org.firstinspires.ftc.team7153.HardwareByrd.PULSES_PER_REVOLUTION;
