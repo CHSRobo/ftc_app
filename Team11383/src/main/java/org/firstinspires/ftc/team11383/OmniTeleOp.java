@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.team11383;
 
 /*
- * Created by Walt Morris on 9/25/17.
- * Made better by Will Archer on 10/20/18
+ * Obsolete as of 11/26/2018
  */
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
