@@ -38,16 +38,13 @@ class HardwareFortissimus2
     DcMotor  leftBackMotor    = null; // runs in y  direction //
     DcMotor  rightBackMotor   = null; // runs in x direction //
     DcMotor  leadScrew        = null; // Extends and Retracts //
-    Servo    hook             = null; // Hooks and Unhooks //
     Servo    relic            = null; // Knocks the relic //
     Servo    push             = null; // Pushes the blocks //
 
-    final double HOOK_HOOK  =  1;
-    final double HOOK_UNHOOK = 0;
-    final double PUSH_UP = 1;
-    final double PUSH_MIDUP = 0.3;
-    final double PUSH_MIDDOWN = 0.15;
-    final double PUSH_DOWN = 0;
+    final double PUSH_A = 1;
+    final double PUSH_B = 0.3;
+    final double PUSH_C = 0.1;
+    final double PUSH_D = 0;
 
 
     /* local OpMode members. */
@@ -92,7 +89,6 @@ class HardwareFortissimus2
         leadScrew.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        hook = hwMap.servo.get("hk");
         relic = hwMap.servo.get("rc");
         push = hwMap.servo.get("ph");
         

@@ -43,23 +43,18 @@ public class OmniTeleOp extends OpMode{
         robot.leftBackMotor.setPower( r * .75 + y * .75);
         robot.leadScrew.setPower(s); // Lead Screw extends with right, retracts with left //
 
-        if (gamepad2.a) { // hooks the hook //
-            robot.hook.setPosition(robot.HOOK_HOOK);
 
-        } else if (gamepad2.b) { // unhooks the hook //
-            robot.hook.setPosition(robot.HOOK_UNHOOK);
-        
-        } else if (gamepad2.dpad_up) { // pusher up //
-            robot.push.setPosition(robot.PUSH_UP);
+        if (gamepad2.dpad_up) { // pusher angle a - highest //
+            robot.push.setPosition(robot.PUSH_A);
             
-        } else if (gamepad2.dpad_right) { // pusher mid //
-            robot.push.setPosition(robot.PUSH_DOWN);
+        } else if (gamepad2.dpad_right) { // pusher angle d - lowest //
+            robot.push.setPosition(robot.PUSH_D);
 
-        } else if (gamepad2.dpad_left) { // pusher mid //
-            robot.push.setPosition(robot.PUSH_MIDUP);
+        } else if (gamepad2.dpad_left) { // pusher angle b - high //
+            robot.push.setPosition(robot.PUSH_B);
 
-        } else if (gamepad2.dpad_down) { // pusher down //
-            robot.push.setPosition(robot.PUSH_MIDDOWN);
+        } else if (gamepad2.dpad_down) { // pusher angle c - low //
+            robot.push.setPosition(robot.PUSH_C);
         }
         
     }
