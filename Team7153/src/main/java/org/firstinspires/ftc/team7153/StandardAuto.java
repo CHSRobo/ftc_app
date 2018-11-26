@@ -2,24 +2,22 @@ package org.firstinspires.ftc.team7153;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import static org.firstinspires.ftc.teamcode.HardwareByrd.LIFT_UP;
-import static org.firstinspires.ftc.teamcode.HardwareByrd.MOVE_AFT;
-import static org.firstinspires.ftc.teamcode.HardwareByrd.MOVE_FORE;
-import static org.firstinspires.ftc.teamcode.HardwareByrd.MOVE_LEFT;
-import static org.firstinspires.ftc.teamcode.HardwareByrd.MOVE_RIGHT;
+import static org.firstinspires.ftc.team7153.HardwareByrd.LIFT_DOWN;
+import static org.firstinspires.ftc.team7153.HardwareByrd.UNHOOK;
 
 
 @Autonomous(name="StandardAuto")
-public class StandardAuto extends GhettoAutoByrd {
+public class StandardAuto extends AutoByrd {
 	@Override
-	public void runOpMode() throws InterruptedException {
+	public void runOpMode() {
 		autonomousInit();
 		waitForStart();
 		autonomousStart();
 		if (!isStopRequested()) {
-			lift(LIFT_UP);
-			move(6,.25, 315);
-			move(6,.5, MOVE_AFT);
+			lift(LIFT_DOWN);
+			hook(UNHOOK);
+			sleep(1000);
+			moveForward(6000,.5);
 			stopMoving();
 		}
 	}

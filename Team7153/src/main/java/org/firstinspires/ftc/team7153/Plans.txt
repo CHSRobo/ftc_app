@@ -1,0 +1,13 @@
+Test Programs
+-Turning
+
+-Moving with gyro
+ -Program Made
+
+-Moving with PID
+ -Program Made
+
+-Strafe encoder vs normal movement
+
+-Color sensor true false
+ -Program Made
