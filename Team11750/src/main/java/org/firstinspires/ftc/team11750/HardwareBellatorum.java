@@ -51,7 +51,7 @@ class HardwareBellatorum
     final double HOOK_OFF = 1;
     final double HOOK_ON = 1;
 
-    final double LIFT_UP_POWER    =  1.00 ;
+    final double LIFT_UP_POWER    = 1.00;
     final double LIFT_DOWN_POWER  = -1.00 ;
     final double LIFT_FEET_PER_SEC = 1;
     final double FORWARD_POWER = 0.6;
