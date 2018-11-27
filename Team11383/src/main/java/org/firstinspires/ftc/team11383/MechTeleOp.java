@@ -78,15 +78,3 @@ public class OmniTeleOp extends OpMode{
     public void stop() {
     }
 }
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
