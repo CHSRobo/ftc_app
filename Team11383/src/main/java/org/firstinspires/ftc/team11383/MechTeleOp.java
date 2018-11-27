@@ -40,18 +40,21 @@ public class OmniTeleOp extends OpMode{
       if(gamepad1.right_bumper){robotAngle=Math.PI*7/4; r=1;}
 	    else if (gamepad1.left_bumper){robotAngle=Math.PI*3/4; r=1;}
 	    
-      double rightX = gamepad1.right_stick_x;
+        double rightX = gamepad1.right_stick_x;
 	    
-      final double v1 = r * Math.sqrt(2) * Math.cos(robotAngle) + rightX;
-	    final double v2 = r * Math.sqrt(2) * Math.sin(robotAngle) - rightX;
-	    final double v3 = r * Math.sqrt(2) * Math.sin(robotAngle) + rightX;
-	    final double v4 = r * Math.sqrt(2) * Math.cos(robotAngle) - rightX;
+    	final double v1 = r * Math.sqrt(2) * Math.cos(robotAngle) + rightX;
+	final double v2 = r * Math.sqrt(2) * Math.sin(robotAngle) - rightX;
+	final double v3 = r * Math.sqrt(2) * Math.sin(robotAngle) + rightX;
+	final double v4 = r * Math.sqrt(2) * Math.cos(robotAngle) - rightX;
 
-	    robot.leftFrontMotor.setPower(v1*maxSpeed);
-	  	robot.rightFrontMotor.setPower(v2*maxSpeed);
-	  	robot.leftBackMotor.setPower(v3*maxSpeed);
-	  	robot.rightBackMotor.setPower(v4*maxSpeed);
+	robot.leftFrontMotor.setPower(v1*maxSpeed);
+	robot.rightFrontMotor.setPower(v2*maxSpeed);
+	robot.leftBackMotor.setPower(v3*maxSpeed);
+	robot.rightBackMotor.setPower(v4*maxSpeed);
 
+	float s = gamepad2.right_stick_x; // set up Lead Screw
+	robot.leadScrew.setPower(s); // extends with right, retract with left
+	    
 
         if (gamepad2.dpad_up) { // pusher angle a - highest //
             robot.push.setPosition(robot.PUSH_A);
