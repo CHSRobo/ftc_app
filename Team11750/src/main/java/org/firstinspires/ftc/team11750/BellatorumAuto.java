@@ -105,20 +105,20 @@ public class BellatorumAuto extends LinearOpMode {
     // Set up the parameters with which we will use our IMU. Note that integration
     // algorithm here just reports accelerations to the logcat log; it doesn't actually
     // provide positional information.
-    BNO055IMU.Parameters imuParameters = new BNO055IMU.Parameters();
-    imuParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
-    imuParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-    imuParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
-    imuParameters.loggingEnabled      = true;
-    imuParameters.loggingTag          = "IMU";
-    imuParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
-
-    // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
-    // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
-    // and named "imu".
-    imu = hardwareMap.get(BNO055IMU.class, "imu");
-        imu.initialize(imuParameters);
-
+//    BNO055IMU.Parameters imuParameters = new BNO055IMU.Parameters();
+//    imuParameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+//    imuParameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+//    imuParameters.calibrationDataFile = "BNO055IMUCalibration.json"; // see the calibration sample opmode
+//    imuParameters.loggingEnabled      = true;
+//    imuParameters.loggingTag          = "IMU";
+//    imuParameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
+//
+//    // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+//    // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+//    // and named "imu".
+//    imu = hardwareMap.get(BNO055IMU.class, "imu");
+//        imu.initialize(imuParameters);
+//
 
     /**
      * {@link #vuforia} is the variable we will use to store our instance of the Vuforia

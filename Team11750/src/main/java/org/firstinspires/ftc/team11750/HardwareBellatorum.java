@@ -53,7 +53,7 @@ class HardwareBellatorum
 
     final double LIFT_UP_POWER    = 1.00;
     final double LIFT_DOWN_POWER  = -1.00 ;
-    final double LIFT_FEET_PER_SEC = 1;
+    final double LIFT_FEET_PER_SEC = 0.06;
     final double FORWARD_POWER = 0.6;
     final double FEET_PER_SEC = 4;
     final double MOVE_START_SECS = 0.1;

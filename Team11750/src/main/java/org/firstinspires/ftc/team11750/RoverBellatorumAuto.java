@@ -72,12 +72,12 @@ public class RoverBellatorumAuto extends BellatorumAuto {
 //        gyro.resetZAxisIntegrator(); // Reset the gyro
 
         sleep(1000); // Wait one second
-        liftDown(14); // Lower the lift in ft
-//        robot.unhook();
+        liftDown(6.5/12); // Lower the lift in ft
+        robot.topClamp.setPosition(robot.HOOK_OFF);
 
-        sleep(1000); // Wait one second
-        oldMove(robot.LEFT, 6/12); // Move out of hook
-        oldMove(robot.FORWARD, 1); // Move away from the lander
+//        sleep(1000); // Wait one second
+//        oldMove(robot.LEFT, 6/12); // Move out of hook
+//        oldMove(robot.FORWARD, 1); // Move away from the lander
 
         // Get the RelicRecoverVuMark location
 //        relicVuMark = getRelicRecoveryVuMark();

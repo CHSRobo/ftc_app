@@ -190,7 +190,7 @@ public class Teleop extends OpMode{
         // Use the bumpers to move the lifts up and down
         if(gamepad1.left_bumper || gamepad2.left_bumper
                 || (gamepad2.left_stick_y > 0.1)) {
-            robot.liftMotor.setPower(robot.LIFT_DOWN_POWER / 2);
+            robot.liftMotor.setPower(robot.LIFT_DOWN_POWER);
 //            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
         }
        else if (gamepad1.right_bumper || gamepad2.right_bumper
