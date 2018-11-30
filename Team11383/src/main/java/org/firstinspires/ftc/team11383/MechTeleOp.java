@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "OmniTeleOp")
+@TeleOp(name = "MechTeleOp")
 
-public class OmniTeleOp extends OpMode{
+public class MechTeleOp extends OpMode{
     private HardwareFortissimus2 robot = new HardwareFortissimus2();
 
     @Override
@@ -43,14 +43,14 @@ public class OmniTeleOp extends OpMode{
         double rightX = gamepad1.right_stick_x;
 	    
     	final double v1 = r * Math.sqrt(2) * Math.cos(robotAngle) + rightX;
-	final double v2 = r * Math.sqrt(2) * Math.sin(robotAngle) - rightX;
-	final double v3 = r * Math.sqrt(2) * Math.sin(robotAngle) + rightX;
-	final double v4 = r * Math.sqrt(2) * Math.cos(robotAngle) - rightX;
+	    final double v2 = r * Math.sqrt(2) * Math.sin(robotAngle) - rightX;
+    	final double v3 = r * Math.sqrt(2) * Math.sin(robotAngle) + rightX;
+        final double v4 = r * Math.sqrt(2) * Math.cos(robotAngle) - rightX;
 
-	robot.leftFrontMotor.setPower(v1*maxSpeed);
-	robot.rightFrontMotor.setPower(v2*maxSpeed);
-	robot.leftBackMotor.setPower(v3*maxSpeed);
-	robot.rightBackMotor.setPower(v4*maxSpeed);
+	    robot.leftFrontMotor.setPower(v1*maxSpeed);
+	    robot.rightFrontMotor.setPower(v2*maxSpeed);
+	    robot.leftBackMotor.setPower(v3*maxSpeed);
+	    robot.rightBackMotor.setPower(v4*maxSpeed);
 
 	float s = gamepad2.right_stick_x; // set up Lead Screw
 	robot.leadScrew.setPower(s); // extends with right, retract with left
