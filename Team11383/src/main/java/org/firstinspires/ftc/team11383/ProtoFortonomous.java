@@ -7,8 +7,8 @@ package org.firstinspires.ftc.team11383;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name="Fortonomous")
-public class Fortonomous extends LinearOpMode{
+@Autonomous(name="ProtoFortonomous")
+public class ProtoFortonomous extends LinearOpMode{
     private HardwareFortissimus2 robot = new HardwareFortissimus2();
 
     @Override
