@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="Fortonomous")
-public class Fortonomous extends LinearOpMode{
+public class Fortonomous extends LinearOpMode {
     private HardwareFortissimus2 robot = new HardwareFortissimus2();
 
     @Override
@@ -21,5 +21,7 @@ public class Fortonomous extends LinearOpMode{
     * Use Lead Screw, Land from Lander
     * Use Gyro, Move to Crater
     */
-        
-        
+
+
+    }
+}

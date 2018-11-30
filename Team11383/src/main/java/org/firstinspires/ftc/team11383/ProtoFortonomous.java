@@ -16,7 +16,7 @@ public class ProtoFortonomous extends LinearOpMode{
     public void runOpMode() throws InterruptedException {
 
         robot.leadScrew.setPower(1);
-        sleep (18000);
+        sleep (10000);
         robot.leadScrew.setPower(0);
         sleep(1000);
         
