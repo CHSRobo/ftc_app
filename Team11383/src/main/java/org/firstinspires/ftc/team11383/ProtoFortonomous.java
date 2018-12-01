@@ -36,11 +36,11 @@ public class ProtoFortonomous extends LinearOpMode{
         robot.leadScrew.setPower(0);
         //sleep(1000);
 
-        robot.hook.setPosition(0);
+        //robot.hook.setPosition(0);
 
-        robot.leftFrontMotor.setPower(1);
+        robot.leftFrontMotor.setPower(-1);
         robot.rightFrontMotor.setPower(1);
-        robot.leftBackMotor.setPower(1);
+        robot.leftBackMotor.setPower(-1);
         robot.rightBackMotor.setPower(1);
         sleep(750);
 
