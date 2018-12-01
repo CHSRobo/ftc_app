@@ -33,13 +33,14 @@ class HardwareFortissimus2
 {
     /* Public OpMode members. */
 
-    DcMotor  leftFrontMotor   = null; // runs in x direction //
-    DcMotor  rightFrontMotor  = null; // runs in y direction //
-    DcMotor  leftBackMotor    = null; // runs in y  direction //
-    DcMotor  rightBackMotor   = null; // runs in x direction //
-    DcMotor  leadScrew        = null; // Extends and Retracts //
-    Servo    relic            = null; // Knocks the relic //
-    Servo    push             = null; // Pushes the blocks //
+    public DcMotor  leftFrontMotor   = null; // runs in x direction //
+    public DcMotor  rightFrontMotor  = null; // runs in y direction //
+    public DcMotor  leftBackMotor    = null; // runs in y  direction //
+    public DcMotor  rightBackMotor   = null; // runs in x direction //
+    public DcMotor  leadScrew        = null; // Extends and Retracts //
+    public Servo    relic            = null; // Knocks the relic //
+    public Servo    push             = null; // Pushes the blocks //
+    public Servo    hook             = null; // Moves the hook //
 
     final double PUSH_A = 1;
     final double PUSH_B = 0.3;
@@ -59,14 +60,15 @@ class HardwareFortissimus2
     /* Initialize standard Hardware interfaces */
     void init(HardwareMap ahwMap) {
         // Save reference to Hardware map
+        HardwareMap hwMap;
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftFrontMotor   = hwMap.dcMotor.get("fl");
-        rightFrontMotor  = hwMap.dcMotor.get("fr");
-        leftBackMotor    = hwMap.dcMotor.get("bl");
-        rightBackMotor   = hwMap.dcMotor.get("br");
-        leadScrew        = hwMap.dcMotor.get("ls");
+        leftFrontMotor   = ahwMap.get(DcMotor.class,"fl");
+        rightFrontMotor  = ahwMap.get(DcMotor.class,"fr");
+        leftBackMotor    = ahwMap.get(DcMotor.class,"bl");
+        rightBackMotor   = ahwMap.get(DcMotor.class,"br");
+        leadScrew        = ahwMap.get(DcMotor.class,"ls");
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to all to FORWARD
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -89,8 +91,9 @@ class HardwareFortissimus2
         leadScrew.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Define and initialize ALL installed servos.
-        relic = hwMap.servo.get("rc");
-        push = hwMap.servo.get("ph");
+        relic = ahwMap.servo.get("rc");
+        push = ahwMap.servo.get("ph");
+        hook = ahwMap.servo.get("hk");
         
         // get a reference to our colorSensor
         // c = hwMap.get(ColorSensor.class, "c");

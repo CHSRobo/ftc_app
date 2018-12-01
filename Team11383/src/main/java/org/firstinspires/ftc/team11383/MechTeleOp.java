@@ -68,6 +68,12 @@ public class MechTeleOp extends OpMode{
         } else if (gamepad2.dpad_down) { // pusher angle c - low //
             robot.push.setPosition(robot.PUSH_C);
         }
+
+        if (gamepad2.a) {
+            robot.hook.setPosition(1);
+        } else if (gamepad2.b) {
+            robot.hook.setPosition(0);
+        }
         
     }
 
