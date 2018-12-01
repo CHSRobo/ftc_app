@@ -35,7 +35,7 @@ public class MechTeleOp extends OpMode{
     double maxSpeed = 1;//Defines what fraction of speed the robot will run at
     //double radGyro = (robot.gyro.getHeading() * Math.PI) / 180;
     double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-    double robotAngle = Math.atan2(-gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+    double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
 	  
     if(gamepad1.right_bumper){robotAngle=Math.PI*7/4; r=1;}
 	    else if (gamepad1.left_bumper){robotAngle=Math.PI*3/4; r=1;}
