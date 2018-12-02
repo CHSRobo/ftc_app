@@ -48,7 +48,7 @@ class HardwareBellatorum
     final double CLAMP_TOP_OPEN = -0.1;
     final double CLAMP_TOP_CLOSED = 1.0;
 
-    final double HOOK_OFF = 1;
+    final double HOOK_OFF = 0;
     final double HOOK_ON = 1;
 
     final double LIFT_UP_POWER    = 1.00;
@@ -227,10 +227,10 @@ class HardwareBellatorum
 
     // Unhook or rehook to/from the lander
     void unhook() {
-//        topClamp.setPosition(HOOK_OFF);
+        topClamp.setPosition(HOOK_OFF);
     }
     void rehook() {
-//        topClamp.setPosition(HOOK_ON);
+        topClamp.setPosition(HOOK_ON);
     }
     // Set the clamp to the specified open angle
 //    void clampOpen(double angle){
