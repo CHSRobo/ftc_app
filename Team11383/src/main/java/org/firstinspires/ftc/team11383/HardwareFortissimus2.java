@@ -1,3 +1,6 @@
+// HardwareFortissimus2.java
+// The hardware master for the bot
+
 package org.firstinspires.ftc.team11383;
 
 /**
@@ -42,6 +45,7 @@ class HardwareFortissimus2
     public Servo    push             = null; // Pushes the blocks //
     public Servo    hook             = null; // Moves the hook //
 
+    // Antiquated push values, but there's no reason to delete just yet
     final double PUSH_A = 1;
     final double PUSH_B = 0.3;
     final double PUSH_C = 0.1;
