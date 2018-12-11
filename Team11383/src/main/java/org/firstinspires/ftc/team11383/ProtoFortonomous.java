@@ -1,3 +1,8 @@
+// ProtoFortonomous.java
+// Prototype Autonomous currently in use
+// Focus on development of basic features
+// Fortonomous.java will be used for more complex future activities
+
 package org.firstinspires.ftc.team11383;
 
 /**
