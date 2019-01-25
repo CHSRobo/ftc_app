@@ -36,9 +36,9 @@ public class MechTeleOp extends OpMode{
 
 
     double maxSpeed = 1;//Defines what fraction of speed the robot will run at
-    //double radGyro = (robot.gyro.getHeading() * Math.PI) / 180;
+    double radGyro = (robot.gyro.getHeading() * Math.PI) / 180;
     double r = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-    double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+    double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4 + radGyro;
 	  
     if(gamepad1.right_bumper){robotAngle=Math.PI*7/4; r=1;}
 	    else if (gamepad1.left_bumper){robotAngle=Math.PI*3/4; r=1;}
@@ -55,12 +55,12 @@ public class MechTeleOp extends OpMode{
     robot.leftBackMotor.setPower(v3*maxSpeed);
     robot.rightBackMotor.setPower(v4*maxSpeed);
 
-	float s = gamepad2.right_stick_x; // set up Lead Screw
-	robot.leftActuator.setPower(s); // extends with right, retract with left
-    robot.rightActuator.setPower(s); // extends with right, retract with left
+	float lift = gamepad2.right_stick_x; // set up Lead Screw
+	robot.leftActuator.setPower(lift); // extends with right, retract with left
+    robot.rightActuator.setPower(lift); // extends with right, retract with left
 
-    float a = gamepad2.left_stick_y; // set up Mineral Arm
-    robot.
+    float arm = gamepad2.left_stick_y; // set up Mineral Arm
+    robot.mineralArm.setPower(.1 * arm); // 10% power
 
         if (gamepad2.dpad_up) { // color sensor up //
             robot.leftArm.setPosition(0);
@@ -71,7 +71,7 @@ public class MechTeleOp extends OpMode{
             robot.rightArm.setPosition(1);
         }
 
-        if (gamepad2.a) {
+        if (gamepad2.a) {       // Changes Hook Position //
             robot.hook.setPosition(1);
         } else if (gamepad2.b) {
             robot.hook.setPosition(0);
