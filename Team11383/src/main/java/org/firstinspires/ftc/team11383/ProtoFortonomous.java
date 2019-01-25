@@ -32,7 +32,7 @@ public class ProtoFortonomous extends LinearOpMode{
         waitForStart();
 
         robot.leadScrew.setPower(1);
-        sleep (28000);
+        sleep (12000);
         robot.leadScrew.setPower(0);
         //sleep(1000);
 

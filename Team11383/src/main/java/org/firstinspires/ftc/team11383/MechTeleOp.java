@@ -40,7 +40,7 @@ public class MechTeleOp extends OpMode{
     if(gamepad1.right_bumper){robotAngle=Math.PI*7/4; r=1;}
 	    else if (gamepad1.left_bumper){robotAngle=Math.PI*3/4; r=1;}
 	    
-    double rightX = gamepad1.right_stick_x;
+    double rightX = -gamepad1.right_stick_x;
 	    
     final double v1 = r * Math.sqrt(2) * Math.cos(robotAngle) + rightX;
     final double v2 = r * Math.sqrt(2) * Math.sin(robotAngle) - rightX;
@@ -53,20 +53,19 @@ public class MechTeleOp extends OpMode{
     robot.rightBackMotor.setPower(v4*maxSpeed);
 
 	float s = gamepad2.right_stick_x; // set up Lead Screw
-	robot.leadScrew.setPower(s); // extends with right, retract with left
-	    
+	robot.leftActuator.setPower(s); // extends with right, retract with left
+    robot.rightActuator.setPower(s); // extends with right, retract with left
 
-        if (gamepad2.dpad_up) { // pusher angle a - highest //
-            robot.push.setPosition(robot.PUSH_A);
+    float a = gamepad2.left_stick_y; // set up Mineral Arm
+    robot.
+
+        if (gamepad2.dpad_up) { // color sensor up //
+            robot.leftArm.setPosition(0);
+            robot.rightArm.setPosition(0);
             
-        } else if (gamepad2.dpad_right) { // pusher angle d - lowest //
-            robot.push.setPosition(robot.PUSH_D);
-
-        } else if (gamepad2.dpad_left) { // pusher angle b - high //
-            robot.push.setPosition(robot.PUSH_B);
-
-        } else if (gamepad2.dpad_down) { // pusher angle c - low //
-            robot.push.setPosition(robot.PUSH_C);
+        } else if (gamepad2.dpad_down) { // color sensor down //
+            robot.leftArm.setPosition(1);
+            robot.rightArm.setPosition(1);
         }
 
         if (gamepad2.a) {

@@ -37,15 +37,15 @@ class HardwareFortissimus2
     public DcMotor  rightFrontMotor  = null; // runs in y direction //
     public DcMotor  leftBackMotor    = null; // runs in y  direction //
     public DcMotor  rightBackMotor   = null; // runs in x direction //
-    public DcMotor  leadScrew        = null; // Extends and Retracts //
+    public DcMotor  leftActuator     = null; // Extends and Retracts //
+    public DcMotor  rightActuator    = null; // Lifts and Lowers the Bot //
     public Servo    relic            = null; // Knocks the relic //
-    public Servo    push             = null; // Pushes the blocks //
+    public Servo    rightArm         = null; // Color Sensor Arm //
+    public Servo    leftArm          = null; // Color Sensor Arm //
     public Servo    hook             = null; // Moves the hook //
 
-    final double PUSH_A = 1;
-    final double PUSH_B = 0.3;
-    final double PUSH_C = 0.1;
-    final double PUSH_D = 0;
+    final double COLOR_ON = 1;
+    final double COLOR_OFF = 0;
 
 
     /* local OpMode members. */
@@ -68,7 +68,8 @@ class HardwareFortissimus2
         rightFrontMotor  = ahwMap.get(DcMotor.class,"fr");
         leftBackMotor    = ahwMap.get(DcMotor.class,"bl");
         rightBackMotor   = ahwMap.get(DcMotor.class,"br");
-        leadScrew        = ahwMap.get(DcMotor.class,"ls");
+        rightActuator    = ahwMap.get(DcMotor.class,"ra");
+        leftActuator     = ahwMap.get(DcMotor.class,"la");
         leftFrontMotor.setDirection(DcMotor.Direction.FORWARD); // Set to all to FORWARD
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -80,19 +81,23 @@ class HardwareFortissimus2
         rightFrontMotor.setPower(0);
         leftBackMotor.setPower(0);
         rightBackMotor.setPower(0);
-        leadScrew.setPower(0);
+        rightActuator.setPower(0);
+        leftActuator.setPower(0);
 
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
+        // Set drive motors to run without encoders.
         leftFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFrontMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         leftBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightBackMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        leadScrew.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        // Set actuator motors to run with encoders.
+        rightActuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        leftActuator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Define and initialize ALL installed servos.
         relic = ahwMap.servo.get("rc");
-        push = ahwMap.servo.get("ph");
+        rightArm = ahwMap.servo.get("ra");
+        leftArm = ahwMap.servo.get("la");
         hook = ahwMap.servo.get("hk");
         
         // get a reference to our colorSensor
@@ -106,6 +111,8 @@ class HardwareFortissimus2
         leftFrontMotor.setPower(0.0);
         rightBackMotor.setPower(0.0);
     }
+
+/* // Old Omni functions
 
     // Start the robot turning in the angle direction at specified power
     void rotate(double angle, double power) {
@@ -129,7 +136,7 @@ class HardwareFortissimus2
         leftBackMotor.setPower(power * Math.cos((Math.PI / 180) * angle));
         leftFrontMotor.setPower(power * Math.sin((Math.PI / 180) * angle));
         rightBackMotor.setPower(-power * Math.sin((Math.PI / 180) * angle));
-    }
+    } */
 
     /***
      *
