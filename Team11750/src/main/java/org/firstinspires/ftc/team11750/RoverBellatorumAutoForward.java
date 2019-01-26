@@ -31,11 +31,6 @@ package org.firstinspires.ftc.team11750;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
-
-import static android.os.SystemClock.sleep;
-import static java.lang.Thread.sleep;
-import static java.lang.Thread.sleep;
 import static java.lang.Thread.sleep;
 //abort action: stop that action immediately//
 
@@ -54,8 +49,8 @@ import static java.lang.Thread.sleep;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Rover Bellatorum Auto", group="Bellatorum")
-public class RoverBellatorumAuto extends BellatorumAuto {
+@Autonomous(name="Rover Bellatorum Auto Forward", group="Bellatorum")
+public class RoverBellatorumAutoForward extends BellatorumAuto {
 
     @Override
     public void runOpMode() {
@@ -82,20 +77,6 @@ public class RoverBellatorumAuto extends BellatorumAuto {
 //        robot.topClamp.setPosition(robot.HOOK_OFF);
 
         sleep(1000); // Wait
-
-        robot.leftFrontMotor.setPower(-0.5); // manually set motors to left//
-        robot.rightFrontMotor.setPower(0.5);
-        robot.rightBackMotor.setPower(-0.5);
-        robot.leftBackMotor.setPower(0.5);
-
-        sleep(500);
-
-        robot.leftFrontMotor.setPower(0); // manually set motors to off//
-        robot.rightFrontMotor.setPower(0);
-        robot.rightBackMotor.setPower(0);
-        robot.leftBackMotor.setPower(0);
-
-
 //        oldMove(-150, 3, 1); // Move out of hook
 //        turn(90);
         oldMove(robot.FORWARD, 3, 1); // Move away from the lander

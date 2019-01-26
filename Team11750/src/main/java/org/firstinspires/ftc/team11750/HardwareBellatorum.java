@@ -33,10 +33,14 @@ class HardwareBellatorum
     DcMotor  leftBackMotor    = null;
     DcMotor  rightBackMotor   = null;
     DcMotor  liftMotor   = null;
+    DcMotor  bucketMotor = null;
 //    DcMotor  backLiftMotor    = null;
 //    Servo    leftClamp   = null;
 //    Servo    rightClamp  = null;
-    Servo    topClamp = null;
+//    Servo    topClamp = null;
+      Servo    leftBucket  = null;
+      Servo    rightBucket = null;
+      Servo    bucketBlock = null;
 //    Servo    colorArm = null;
 //    ColorSensor colorSensor;
 //    boolean clampInstalled=true; // Set to false to run without clamp installed, true to run with
@@ -51,9 +55,12 @@ class HardwareBellatorum
     final double HOOK_OFF = 0;
     final double HOOK_ON = 1;
 
-    final double LIFT_UP_POWER    = 1.00;
-    final double LIFT_DOWN_POWER  = -1.00 ;
-    final double LIFT_FEET_PER_SEC = 0.06;
+    final double BUCKET_DOWN_POWER = 1.00;
+    final double BUCKET_UP_POWER = -1.00;
+
+    final double LIFT_UP_POWER    = -1.00;
+    final double LIFT_DOWN_POWER  = 1.00 ;
+    final double LIFT_FEET_PER_SEC = 0.65;
     final double FORWARD_POWER = 0.6;
     final double FEET_PER_SEC = 4;
     final double MOVE_START_SECS = 0.1;
@@ -94,6 +101,7 @@ class HardwareBellatorum
         rightFrontMotor  = hwMap.dcMotor.get("right_front_drive");
         leftBackMotor    = hwMap.dcMotor.get("left_back_drive");
         rightBackMotor   = hwMap.dcMotor.get("right_back_drive");
+        bucketMotor      = hwMap.dcMotor.get("bucket_arm");
         leftFrontMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         leftBackMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
@@ -117,7 +125,10 @@ class HardwareBellatorum
 //
 //            leftClamp = hwMap.servo.get("left_hand");
 //            rightClamp = hwMap.servo.get("right_hand");
-            topClamp = hwMap.servo.get("top_hand");
+//            topClamp = hwMap.servo.get("top_hand");
+              leftBucket = hwMap.servo.get("lbucket_hand");
+              rightBucket = hwMap.servo.get("rbucket_hand");
+              bucketBlock = hwMap.servo.get("blocker_hand");
 //            leftClamp.setPosition(CLAMP_LEFT_OPEN);
 //            rightClamp.setPosition(CLAMP_RIGHT_OPEN);
 //            topClamp.setPosition(CLAMP_TOP_OPEN);
@@ -226,12 +237,13 @@ class HardwareBellatorum
     }
 
     // Unhook or rehook to/from the lander
-    void unhook() {
-        topClamp.setPosition(HOOK_OFF);
-    }
-    void rehook() {
-        topClamp.setPosition(HOOK_ON);
-    }
+//    void unhook() {
+//        topClamp.setPosition(HOOK_OFF);
+//    }
+//    void rehook() {
+//        topClamp.setPosition(HOOK_ON);
+//    }
+
     // Set the clamp to the specified open angle
 //    void clampOpen(double angle){
 //        if (!clampInstalled) return;

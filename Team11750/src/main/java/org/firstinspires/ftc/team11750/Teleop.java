@@ -64,6 +64,10 @@ public class Teleop extends OpMode{
     private boolean drill=false; // Initially disable drill mode
 //    ModernRoboticsI2cGyro gyro; // Gyroscope Sensor //
 
+    final double BUCKET_DOWN = 0.90;
+    final double BUCKET_UP   = 0.00;
+
+
     /*
      * Code to run ONCE when the driver hits INIT
      */
@@ -153,8 +157,8 @@ public class Teleop extends OpMode{
 //        }
 
         // Rehook or unhook the bot to/from the lander
-        if (gamepad1.x) robot.rehook();
-        if (gamepad1.b) robot.unhook();
+//        if (gamepad1.x) robot.rehook();
+//        if (gamepad1.b) robot.unhook();
 
         // Use gamepad left & right triggers to open and close the clamp
 //        if ((gamepad1.right_trigger > 0.01) || (gamepad2.right_trigger > 0.01)
@@ -167,8 +171,8 @@ public class Teleop extends OpMode{
 //        }
 
         // Use controller 2's directional pad to control the top arm
-        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.HOOK_OFF); }
-        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.HOOK_ON); }
+//        if (gamepad2.dpad_up) { robot.topClamp.setPosition(robot.HOOK_OFF); }
+//        if (gamepad2.dpad_down) { robot.topClamp.setPosition(robot.HOOK_ON); }
 
         // Test code for drive motors
         if (gamepad1.dpad_up) { robot.leftFrontMotor.setPower(0.5); }
@@ -201,6 +205,27 @@ public class Teleop extends OpMode{
         else {
             robot.liftMotor.setPower(0.0);
 //            robot.backLiftMotor.setPower(0.0);
+        }
+
+        // Use gamepad 2's triggers to move bucket arm
+        if (gamepad2.left_trigger > 0.01) {
+            robot.bucketMotor.setPower(gamepad2.left_trigger);
+        }
+        else if (gamepad2.right_trigger > 0.01) {
+            robot.bucketMotor.setPower(-gamepad2.right_trigger);
+        }
+        else {
+            robot.bucketMotor.setPower(0.0);
+        }
+
+        // Use GP2's right stick to dump the bucket
+        if (gamepad2.right_stick_y > 0.1) {
+            robot.leftBucket.setPosition(BUCKET_UP);
+            robot.rightBucket.setPosition(-BUCKET_UP);
+        }
+        else if (gamepad2.right_stick_y < -0.1) {
+            robot.leftBucket.setPosition(BUCKET_DOWN);
+            robot.rightBucket.setPosition(-BUCKET_DOWN);
         }
 
         // Send telemetry message to signify robot running;
