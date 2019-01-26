@@ -48,7 +48,8 @@ class HardwareFortissimus2
     public Servo    leftArm          = null; // Color Sensor Arm //
     public Servo    hook             = null; // Moves the hook //
 
-    public ColorSensor color;
+    public ColorSensor leftColor;
+    public ColorSensor rightColor;
     public GyroSensor gyro;
 
     /* local OpMode members. */
@@ -59,6 +60,31 @@ class HardwareFortissimus2
     HardwareFortissimus2(){
 
     }
+
+    // Declare misc variables
+    static double WHEEL_CIRCUMFERENCE = 4;
+    static double PULSES_PER_REVOLUTION = 280;
+
+    static double INPUT_TIMER = 0;
+
+    static double DEFAULT_TURN_SPEED = 10;//In degrees per second
+    static double DEFAULT_MOVE_SPEED = 6;//In inches per second
+
+    static double MOVE_LEFT  = 180;
+    static double MOVE_FORE  = 90;
+    static double MOVE_AFT   = 270;
+    static double MOVE_RIGHT = 0;
+
+    static double TURN_ERROR = 1;
+
+    static boolean LIFT_UP = true;
+    static boolean LIFT_DOWN = false;
+
+    static boolean UNHOOK = false;
+    static boolean HOOK   = true;
+
+    static double  HOOK_CLOSED = 0;
+    static double  HOOK_OPEN   = 1;
 
     /* Initialize standard Hardware interfaces */
     void init(HardwareMap ahwMap) {
@@ -107,18 +133,13 @@ class HardwareFortissimus2
         hook = ahwMap.servo.get("hk");
 
         // Define Sensors
-        color = hwMap.get(ColorSensor.class, "color");
+        rightColor = hwMap.get(ColorSensor.class, "rcolor");
+        leftColor = hwMap.get(ColorSensor.class, "lcolor");
         gyro = hwMap.get(GyroSensor.class,"gyro");
 
     }
 
-    // Stop the robot from moving
-    void stop() {
-        leftBackMotor.setPower(0.0); // Stop
-        rightFrontMotor.setPower(0.0);
-        leftFrontMotor.setPower(0.0);
-        rightBackMotor.setPower(0.0);
-    }
+
 
 /* // Old Omni functions
 

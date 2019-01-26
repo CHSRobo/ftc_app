@@ -55,21 +55,12 @@ public class MechTeleOp extends OpMode{
     robot.leftBackMotor.setPower(v3*maxSpeed);
     robot.rightBackMotor.setPower(v4*maxSpeed);
 
-	float lift = gamepad2.right_stick_x; // set up Lead Screw
+	float lift = gamepad2.right_stick_x; // set up Linear Actuator
 	robot.leftActuator.setPower(lift); // extends with right, retract with left
     robot.rightActuator.setPower(lift); // extends with right, retract with left
 
     float arm = gamepad2.left_stick_y; // set up Mineral Arm
-    robot.mineralArm.setPower(.1 * arm); // 10% power
-
-        if (gamepad2.dpad_up) { // color sensor up //
-            robot.leftArm.setPosition(0);
-            robot.rightArm.setPosition(0);
-            
-        } else if (gamepad2.dpad_down) { // color sensor down //
-            robot.leftArm.setPosition(1);
-            robot.rightArm.setPosition(1);
-        }
+    robot.mineralArm.setPower(.25 * arm); // 25% power
 
         if (gamepad2.a) {       // Changes Hook Position //
             robot.hook.setPosition(1);
