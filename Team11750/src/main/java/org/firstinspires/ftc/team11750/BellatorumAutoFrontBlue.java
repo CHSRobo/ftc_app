@@ -63,14 +63,14 @@ public class BellatorumAutoFrontBlue extends BellatorumAuto {
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");
-        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
+//        if (!robot.clampInstalled) telemetry.addData("Status","### Clamp disabled ###");
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
-        gyro.resetZAxisIntegrator(); // Reset the gyro
+//        gyro.resetZAxisIntegrator(); // Reset the gyro
 
-        robot.clampClose(); // Grab the glyph
+//        robot.clampClose(); // Grab the glyph
         sleep(1000); // Wait one second
         liftUp(1); // Raise the lift in ft
 
@@ -93,7 +93,7 @@ public class BellatorumAutoFrontBlue extends BellatorumAuto {
         move(robot.FORWARD, 0.75); // Move forward in feet
 
         liftDown(0.6); // Lower the lift in ft
-        robot.clampOpen(); // Drop the glyph
+//        robot.clampOpen(); // Drop the glyph
         move(robot.FORWARD, 0.65, 0.4); // Move forward in feet
 
         move(robot.BACK, 0.2); // Back up

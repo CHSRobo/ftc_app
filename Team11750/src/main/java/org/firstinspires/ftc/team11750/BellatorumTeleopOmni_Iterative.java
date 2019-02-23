@@ -116,8 +116,8 @@ public class BellatorumTeleopOmni_Iterative extends OpMode{
 
         // Move both servos to new position.  Assume servos are mirror image of each other.
         clampOffset = Range.clip(clampOffset, -0.75, 0.75);
-        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
-        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
+//        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
+//        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
 
         /*
         // Use gamepad buttons to move the lift up (Y) and down (A)
@@ -142,12 +142,12 @@ public class BellatorumTeleopOmni_Iterative extends OpMode{
             robot.liftMotor.setPower(0.0);
 
         // Use the right stick to move the back lift up and down
-        if (b > 0.1)
-            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER);
-        else if (b < -0.1)
-            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
-        else
-            robot.backLiftMotor.setPower(0.0);
+//        if (b > 0.1)
+//            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER);
+//        else if (b < -0.1)
+//            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
+//        else
+//            robot.backLiftMotor.setPower(0.0);
 
         // Send telemetry message to signify robot running;
         telemetry.addData("clamp",  "Offset = %.2f", clampOffset);

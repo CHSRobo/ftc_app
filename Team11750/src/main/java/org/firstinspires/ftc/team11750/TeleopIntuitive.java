@@ -150,8 +150,8 @@ public class TeleopIntuitive extends OpMode{
 
         // Move both servos to new position.  Assume servos are mirror image of each other.
         clampOffset = Range.clip(clampOffset, -0.75, 0.75);
-        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
-        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
+//        robot.leftClamp.setPosition(robot.CLAMP_LEFT_OPEN + clampOffset);
+//        robot.rightClamp.setPosition(robot.CLAMP_RIGHT_OPEN - clampOffset);
 
         // Use R1 and L1 to move the front lift up and down
         if(gamepad1.left_bumper)
@@ -162,12 +162,12 @@ public class TeleopIntuitive extends OpMode{
             robot.liftMotor.setPower(0.0);
 
         // Use R2 and L2 to move the back lift up and down
-        if (gamepad1.left_trigger > 0.1)
-            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER);
-        else if (gamepad1.right_trigger > 0.1)
-            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
-        else
-            robot.backLiftMotor.setPower(0.0);
+//        if (gamepad1.left_trigger > 0.1)
+//            robot.backLiftMotor.setPower(robot.LIFT_UP_POWER);
+//        else if (gamepad1.right_trigger > 0.1)
+//            robot.backLiftMotor.setPower(robot.LIFT_DOWN_POWER);
+//        else
+//            robot.backLiftMotor.setPower(0.0);
 
         // Send telemetry message to signify robot running;
         telemetry.addData("clamp",  "Offset = %.2f", clampOffset);
