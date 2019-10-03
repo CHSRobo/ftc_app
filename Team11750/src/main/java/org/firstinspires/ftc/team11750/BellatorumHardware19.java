@@ -10,11 +10,15 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 class BellatorumHardware19 {
-    DcMotor  frontRight        = null;
-    DcMotor  frontLeft         = null;
-    DcMotor  backRight         = null;
-    DcMotor  backLeft          = null;
+    //drive motors
+    DcMotor  frontRight = null;
+    DcMotor  frontLeft = null;
+    DcMotor  backRight = null;
+    DcMotor  backLeft = null;
 
+    //arm servos
+    Servo armLeft;
+    Servo armRight;
 
     BellatorumHardware19(){
 
@@ -39,6 +43,9 @@ class BellatorumHardware19 {
         backRight.setDirection(DcMotor.Direction.REVERSE);
         backLeft.setDirection(DcMotor.Direction.FORWARD);
 
+        //Define and initialise arm servos
+        armLeft = hwMap.get(Servo.class, "al");
+        armRight = hwMap.get(Servo.class, "ar");
 
         // Set all motors to run without encoders.
         // May want to use RUN_USING_ENCODERS if encoders are installed.
