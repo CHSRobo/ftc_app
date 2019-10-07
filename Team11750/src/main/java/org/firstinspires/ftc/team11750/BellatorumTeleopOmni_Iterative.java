@@ -103,10 +103,23 @@ public class BellatorumTeleopOmni_Iterative extends OpMode{
         float y = gamepad1.left_stick_y;
         float r = gamepad1.right_stick_x; // Read the rotation from the right stick
 
-        robot.leftFrontMotor.setPower(x+r);  // Set wheels equal to left stick //
-        robot.rightFrontMotor.setPower(-r-y);  // direction plus amount of turn  //
-        robot.rightBackMotor.setPower(x-r);
-        robot.leftBackMotor.setPower( r-y);
+        // Robot Translate/Slide mode
+        if(gamepad1.right_bumper) robot.gyro.resetZAxisIntegrator(); // Re-orient the bot
+        if(gamepad1.left_trigger>0.1) {
+            double z=robot.gyro.getIntegratedZValue(); // Get anchor heading
+            double angle=Math.asin(y/x); // Calculate the new desired direction
+            double power=Math.sqrt(x*x+y*y); // Calculate the desired power
+            // Set the wheels to the send the bot towards the desired direction less the z anchor + rotation
+            robot.leftFrontMotor.setPower(power*Math.cos(angle-z)+r);
+            robot.rightFrontMotor.setPower(-power*Math.sin(angle-z)+r);
+            robot.rightBackMotor.setPower(power*Math.cos(angle-z)+r);
+            robot.leftBackMotor.setPower(-power*Math.sin(angle-z)+r);
+        } else { // use the old mode
+            robot.leftFrontMotor.setPower(x+r);  // Set wheels equal to left stick //
+            robot.rightFrontMotor.setPower(-y-r);  // direction plus amount of turn  //
+            robot.rightBackMotor.setPower(x-r);
+            robot.leftBackMotor.setPower(r-y);
+        }
 
         // Use gamepad left & right Bumpers to open and close the clamp
         if (gamepad2.right_bumper)

@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -40,6 +41,7 @@ class HardwareBellatorum
     Servo    rightClamp  = null;
     Servo    colorArm = null;
     ColorSensor colorSensor;
+    ModernRoboticsI2cGyro gyro    = null;                    // Additional Gyro device
     boolean clampInstalled=true; // Set to false to run without clamp installed, true to run with
 
     final double CLAMP_LEFT_OPEN  =  0.35;
@@ -64,11 +66,20 @@ class HardwareBellatorum
     final double ARM_DOWN = 118;
     final int COLOR_RED = 1;
     final int COLOR_BLUE = 2;
-    final double     COUNTS_PER_MOTOR_REV    = 1120 ;    // eg: AndyMark NeverRest 40 Motor Encoder
-    final double     DRIVE_GEAR_REDUCTION    = 1.0;      // This is < 1.0 if geared UP
+    final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
+    final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
     final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
     final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                (WHEEL_DIAMETER_INCHES * 3.1415);
+                                                       (WHEEL_DIAMETER_INCHES * 3.1415);
+
+    // These constants define the desired driving/control characteristics
+    // The can/should be tweaked to suite the specific robot drive train.
+    final double     DRIVE_SPEED             = 0.7;     // Nominal speed for better accuracy.
+    final double     TURN_SPEED              = 0.5;     // Nominal half speed for better accuracy.
+
+    final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
+    final double     P_TURN_COEFF            = 0.008;     // Larger is more responsive, but also less stable
+    final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
 
     /* local OpMode members. */
     private HardwareMap hwMap           =  null;
@@ -93,6 +104,7 @@ class HardwareBellatorum
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         leftBackMotor.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightBackMotor.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        gyro = (ModernRoboticsI2cGyro)hwMap.gyroSensor.get("gyro");
 
         // Set all motors to zero power
         stopMoving();
